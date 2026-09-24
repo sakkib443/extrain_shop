@@ -196,7 +196,7 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
                 className={`flex items-center w-full transition-shadow duration-200 focus-within:shadow-[0_0_0_3px_rgba(var(--color-primary-rgb),0.10)] ${
                     isMobile ? 'h-[44px] rounded-[10px] px-2' : 'h-[54px] rounded-[10px] px-3'
                 }`}
-                style={{ background: 'var(--color-soft)', border: '1px solid var(--color-soft-border)' }}
+                style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.06)' }}
             >
                 {leading}
 

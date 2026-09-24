@@ -178,7 +178,10 @@ const Header: React.FC = () => {
     );
 
     return (
-        <header className="dz-header w-full sticky top-0 z-[60] lg:static bg-white rounded-b-[20px] lg:rounded-none lg:px-4 transition-colors duration-300">
+        <header className="dz-header w-full sticky top-0 z-[60] lg:static bg-white lg:px-4 transition-colors duration-300">
+
+            {/* Rows 1–3 share the charcoal backdrop; the ticker below sits on white. */}
+            <div className="dz-header-bg rounded-b-[20px] lg:rounded-none">
 
             {/* ═══════════ 1 · UTILITY BAR ═══════════
                 Hairline strip of secondary links. Hidden below md, exactly as the
@@ -213,21 +216,21 @@ const Header: React.FC = () => {
 
             {/* ═══════════ 2 · MAIN BAR ═══════════
                 Logo · quick links · search (takes the slack) · action squares. */}
-            <div className="border-b border-black/5">
+            <div className="border-b border-white/5">
                 <div className="max-w-[1400px] mx-auto lg:px-9 px-4">
 
                     <div className="hidden md:flex items-center gap-6 py-4">
 
                         <Link href="/" className="shrink-0 mr-2" onClick={() => setSearchQuery('')}>
-                            <HeaderLogo />
+                            <HeaderLogo light />
                         </Link>
 
                         <nav className="hidden lg:flex items-center gap-1">
                             {PRIMARY_LINKS.map(l => (
                                 <Link key={l.href} href={l.href}
                                     className={`text-sm px-3 py-1.5 rounded-lg transition-colors font-medium whitespace-nowrap ${l.highlight
-                                        ? 'border text-[#222]'
-                                        : 'text-gray-600 hover:text-black hover:bg-black/5'}`}
+                                        ? 'border text-white'
+                                        : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
                                     style={l.highlight
                                         ? { borderColor: 'var(--hd-gold-line)', background: 'var(--hd-gold-soft)' }
                                         : undefined}>
@@ -253,7 +256,7 @@ const Header: React.FC = () => {
                             {isAuthenticated && user ? (
                                 <div className="relative" ref={profileRef}>
                                     <button onClick={() => setIsProfileOpen(!isProfileOpen)}
-                                        className={`${iconBtn} bg-[var(--color-soft)] hover:bg-black/5 cursor-pointer`}
+                                        className={`${iconBtn} bg-white hover:bg-white/90 cursor-pointer`}
                                         aria-label="Account">
                                         {user.avatar
                                             ? <img src={user.avatar} alt="" className="w-7 h-7 rounded-full object-cover" />
@@ -289,12 +292,12 @@ const Header: React.FC = () => {
                                     )}
                                 </div>
                             ) : (
-                                <Link href="/login" className={`${iconBtn} bg-[var(--color-soft)] hover:bg-black/5`} aria-label="Sign in">
+                                <Link href="/login" className={`${iconBtn} bg-white hover:bg-white/90`} aria-label="Sign in">
                                     <FiUser size={22} strokeWidth={1.7} className="text-[#222]" />
                                 </Link>
                             )}
 
-                            <Link href="/cart" className={`${iconBtn} bg-[var(--color-soft)] hover:bg-black/5 relative`} aria-label="Cart">
+                            <Link href="/cart" className={`${iconBtn} bg-white hover:bg-white/90 relative`} aria-label="Cart">
                                 <FiShoppingCart size={21} strokeWidth={1.8} className="text-[#222]" />
                                 {cartBadge}
                             </Link>
@@ -316,11 +319,11 @@ const Header: React.FC = () => {
                     </div>
 
                     {/* ── Mobile bar ──────────────────────────────────────────────
-                        A dark slab with a rounded underside, the way the reference
-                        does it — the white action squares and the search field read
-                        as cut-outs in it, and the whole thing stays put while the
-                        page scrolls (the header is sticky below lg). */}
-                    <div className="md:hidden py-3 -mx-4 px-4 rounded-b-[20px]" style={{ background: 'var(--hd-dark)' }}>
+                        The backdrop above supplies the dark slab and its rounded
+                        underside; the white action squares and the search field read
+                        as cut-outs in it. Stays put while the page scrolls — the
+                        header is sticky below lg. */}
+                    <div className="md:hidden py-3">
                         <div className="flex items-center justify-between gap-3">
                             <Link href="/" className="shrink-0" onClick={() => setSearchQuery('')}>
                                 <HeaderLogo light height={30} maxWidth={150} />
@@ -435,7 +438,7 @@ const Header: React.FC = () => {
                             )}
                         </div>
 
-                        <div className="w-px h-6 bg-gray-200 shrink-0" />
+                        <div className="w-px h-6 bg-white/15 shrink-0" />
 
                         <nav className="flex items-center justify-between rounded-lg flex-1 bg-white py-1.5 px-5 relative z-[99] overflow-hidden">
                             {barCategories.map(cat => (
@@ -449,6 +452,7 @@ const Header: React.FC = () => {
                     </div>
                 </div>
             </div>
+            </div>{/* /dz-header-bg */}
 
             {/* ═══════════ 4 · ANNOUNCEMENT TICKER ═══════════
                 The list is rendered twice and the track slides exactly -50%, so the
