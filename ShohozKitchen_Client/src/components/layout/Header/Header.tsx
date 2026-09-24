@@ -128,7 +128,7 @@ const Header: React.FC = () => {
         and padding (1420/px-12, 1400/px-9, 1344/px-2), which staggered the
         three left edges by up to 40px and was what made the header look
         unaligned. One rule now, so the rows sit in a single column. */
-    const SHELL = 'max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10';
+    const SHELL = 'shell';
 
     /** The square the action icons sit in. Height comes from --hd-control, the
         same token the search field and EXPLORE ALL use, so all three line up. */

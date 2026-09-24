@@ -73,9 +73,10 @@ const HeroSection: React.FC = () => {
 
     return (
         <section className="w-full">
-            {/* Same .container as every other section, so the banners' edges line
-                up with the cards below them. Its width rule lives in globals.css. */}
-            <div className="container mx-auto py-4 sm:py-5">
+            {/* .shell, the same column the header uses, so the banners' edges sit
+                directly under the header's. The wider .container used before grew
+                with the viewport and overhung it on a large monitor. */}
+            <div className="shell py-4 sm:py-5">
                 <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[1.777fr_1fr]">
 
                     {/* ── Left: the wide rail ───────────────────────────────── */}

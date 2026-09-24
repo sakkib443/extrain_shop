@@ -129,14 +129,13 @@ h6 {
 }
 
 /* ===== Container ===== */
-/* One width rule for the whole page — header, hero and every section share it,
-   so their left/right edges line up.
-   max(1500px, …) means nothing ever gets narrower than before; on monitors wider
-   than ~1670px it grows to 90% of the screen instead of stopping at 1500px,
-   and 2000px is the ceiling so ultrawides don't stretch a line of text forever. */
+/* Same column as .shell (defined at the end of this file), which the header and
+   hero use. It used to be max(1500px, min(90%, 2000px)) — wider, and growing
+   with the viewport — so on a large monitor every section below the hero
+   overhung it by about 160px a side. One width now, and the page lines up. */
 .container {
   width: 100%;
-  max-width: max(1500px, min(90%, 2000px));
+  max-width: 1400px;
   margin-left: auto;
   margin-right: auto;
   padding-left: 1rem;
@@ -1177,4 +1176,29 @@ h6 {
 
 .hero-arrow:hover {
   background: #ffffff;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   SHELL — the storefront's column.
+
+   One rule shared by the header and the hero, so their left and right
+   edges line up at every width. `.container` above is wider and grows
+   with the viewport (up to 90%), which left the hero overhanging the
+   header by a few hundred pixels on a large monitor.
+   ═══════════════════════════════════════════════════════════════════ */
+.shell {
+  width: 100%;
+  max-width: 1400px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+@media (min-width: 640px) {
+  .shell { padding-left: 1.5rem; padding-right: 1.5rem; }
+}
+
+@media (min-width: 1024px) {
+  .shell { padding-left: 2.5rem; padding-right: 2.5rem; }
 }
