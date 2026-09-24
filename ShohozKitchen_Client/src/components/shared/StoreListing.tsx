@@ -650,7 +650,7 @@ const StoreListing: React.FC<StoreListingProps> = ({
 
                         {/* Product Grid */}
                         {isFetching && products.length === 0 ? (
-                            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-2">
+                            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2">
                                 {[...Array(10)].map((_, i) => (
                                     <div key={i} className="bg-white border border-gray-200 animate-pulse">
                                         <div className="aspect-square bg-gray-100" />
@@ -677,7 +677,7 @@ const StoreListing: React.FC<StoreListingProps> = ({
                                 )}
                             </div>
                         ) : (
-                            <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-5 gap-2 transition-opacity duration-200 ${isFetching ? 'opacity-60' : 'opacity-100'}`}>
+                            <div className={`grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 transition-opacity duration-200 ${isFetching ? 'opacity-60' : 'opacity-100'}`}>
                                 {products.map((product: any) => (
                                     <NewProductCard
                                         key={product._id}

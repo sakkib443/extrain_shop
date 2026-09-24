@@ -57,7 +57,7 @@ export default function SharedWishlistPage() {
 
             {/* Body */}
             {isLoading ? (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4">
                     {[...Array(6)].map((_, i) => (
                         <div key={i} className="bg-white border border-gray-200 animate-pulse">
                             <div className="aspect-square bg-slate-100" />
@@ -95,7 +95,7 @@ export default function SharedWishlistPage() {
                     </Link>
                 </div>
             ) : (
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4">
                     {products.map((product) => (
                         <NewProductCard key={product.id} product={product} />
                     ))}

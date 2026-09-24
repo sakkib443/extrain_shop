@@ -14,7 +14,7 @@ import SectionHeader from './SectionHeader';
  * products yet.
  */
 const BestSellers: React.FC = () => {
-    const { data } = useGetProductsQuery({ limit: 12, sort: '-totalSold' });
+    const { data } = useGetProductsQuery({ limit: 10, sort: "-totalSold" });
     const products: any[] = data?.data || [];
 
     if (products.length === 0) return null;
@@ -24,7 +24,7 @@ const BestSellers: React.FC = () => {
             <div className="bg-white rounded-lg p-3 sm:p-4 shadow-sm">
                 <SectionHeader title="Best Sellers" seeMoreHref="/products?sort=-totalSold" />
 
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-4">
                     {products.map((product) => (
                         <NewProductCard
                             key={product._id}

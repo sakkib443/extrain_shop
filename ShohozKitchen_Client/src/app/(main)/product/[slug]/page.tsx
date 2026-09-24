@@ -1015,7 +1015,7 @@ export default function ProductDetailsPage() {
                                     </Link>
                                 )}
                             </div>
-                            <div className="pd-related-grid grid grid-cols-4 gap-2 overflow-hidden">
+                            <div className="pd-related-grid grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 overflow-hidden">
                                 {relatedProducts.slice(0, 4).map((item: any) => (
                                     <NewProductCard key={item._id} product={{ id: item._id, slug: item.slug, name: item.name, image: item.thumbnail, price: item.price, originalPrice: item.originalPrice, mrp: item.originalPrice || item.price, discount: item.discount, offerStartDate: item.offerStartDate, offerEndDate: item.offerEndDate, rating: item.rating, reviews: item.reviewCount, categoryName: item.category?.name || product?.category?.name, priceType: item.priceType, likeCount: item.likeCount || 0, commentCount: item.commentCount || 0, shareCount: item.shareCount || 0, viewCount: item.viewCount || 0, reviewCount: item.reviewCount || 0 }} />
                                 ))}
