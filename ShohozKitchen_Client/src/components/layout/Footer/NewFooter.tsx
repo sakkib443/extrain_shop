@@ -103,7 +103,7 @@ const NewFooter: React.FC = () => {
 
                     {/* Brand + Address + Social */}
                     <div className="sm:col-span-2 lg:col-span-1">
-                        <Link href="/" className="inline-flex items-center mb-5 group select-none" aria-label="Shohoz Kitchen">
+                        <Link href="/" className="inline-flex items-center mb-5 group select-none" aria-label="Trendy Shops">
                             <Logo size={66} />
                         </Link>
                         <div className="space-y-2.5">
@@ -258,7 +258,7 @@ const NewFooter: React.FC = () => {
                 <div className="container mx-auto px-4 py-4">
                     <div className="flex flex-col md:flex-row items-center justify-between gap-2">
                         <p className="text-xs text-gray-400">
-                            {siteRes?.data?.footer?.copyright || `© 2019-${new Date().getFullYear()} ${siteRes?.data?.footer?.companyName || 'Shohoz Kitchen'}. All Rights Reserved.`}
+                            {siteRes?.data?.footer?.copyright || `© 2019-${new Date().getFullYear()} ${siteRes?.data?.footer?.companyName || 'Trendy Shops'}. All Rights Reserved.`}
                         </p>
                         <div className="flex items-center gap-3">
                             <span className="text-xs text-gray-400">

@@ -165,7 +165,7 @@ function StoreInfoCard({ saved }: { saved: General }) {
         <Card title="Store information" description="Your store's name, tagline and currency.">
             <div className="space-y-4">
                 <Field label="Store name">
-                    <input className={INPUT} value={values.storeName || ''} placeholder="Shohoz Kitchen"
+                    <input className={INPUT} value={values.storeName || ''} placeholder="Trendy Shops"
                         onChange={(e) => set('storeName', e.target.value)} />
                 </Field>
                 <Field label="Tagline">

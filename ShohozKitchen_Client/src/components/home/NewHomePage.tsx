@@ -60,7 +60,7 @@ const NewHomePage: React.FC = () => {
         const productsReady = !isLoading && !isFetching && !!productsData;
         const categoriesReady = !!categoriesData;
         if (productsReady && categoriesReady) {
-            window.dispatchEvent(new CustomEvent('shohozkitchen:dataReady'));
+            window.dispatchEvent(new CustomEvent('trendyshops:dataReady'));
         }
     }, [isLoading, isFetching, productsData, categoriesData]);
 

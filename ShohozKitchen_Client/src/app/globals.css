@@ -925,13 +925,17 @@ h6 {
    The white pills inside (utility strip, search, action squares, the
    category rail) are cut-outs against it. */
 .dz-header-bg {
+  /* Solid all the way down. The last stop used to fade to transparent, which
+     left a washed-out band above the ticker instead of an edge. The block now
+     ends on a definite colour and curves into the white below it. */
   background-image: linear-gradient(
     to bottom,
-    rgba(87, 77, 67, 0.80) 0%,
-    rgba(32, 30, 26, 0.96) 50%,
-    rgba(26, 24, 21, 0.94) 90%,
-    rgba(26, 24, 21, 0) 100%
+    #3b352f 0%,
+    #221f1c 55%,
+    #1b1917 100%
   );
+  border-bottom-left-radius: 18px;
+  border-bottom-right-radius: 18px;
 }
 
 /* ── Header: measurement system ───────────────────────────────────────

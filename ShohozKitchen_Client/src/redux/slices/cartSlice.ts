@@ -29,7 +29,7 @@ const loadCartFromStorage = (): CartState => {
         return { items: [], totalQuantity: 0, totalPrice: 0 };
     }
     try {
-        const stored = localStorage.getItem('shohozkitchen_cart');
+        const stored = localStorage.getItem('trendyshops_cart');
         if (stored) {
             const parsed = JSON.parse(stored);
             return {
@@ -46,7 +46,7 @@ const loadCartFromStorage = (): CartState => {
 const saveCartToStorage = (state: CartState) => {
     if (typeof window !== 'undefined') {
         try {
-            localStorage.setItem('shohozkitchen_cart', JSON.stringify({
+            localStorage.setItem('trendyshops_cart', JSON.stringify({
                 items: state.items,
                 totalQuantity: state.totalQuantity,
                 totalPrice: state.totalPrice,

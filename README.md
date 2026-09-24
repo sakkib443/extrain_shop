@@ -11,7 +11,7 @@ dashboard. This monorepo holds both halves of the product:
 Payments: bKash, SSLCommerz, Cash on Delivery. Courier: **Steadfast** (booking, status sync, returns).
 Currency: BDT (৳); purchases are tracked in RMB (¥) and BDT.
 
-> **Note:** folders, package names and internal strings still carry the `ShohozKitchen` name from the
+> **Note:** folders, package names and internal strings still carry the `TrendyShops` name from the
 > codebase this was cloned from. Renaming is a separate, deliberate pass — see *Rebranding* below.
 
 ## Getting started
@@ -48,7 +48,7 @@ Not done yet — when the new brand name is decided, these are the places that c
 - Folder names `ShohozKitchen_Client` / `ShohozKitchen_Server`, and `name` in all three `package.json` files
 - `metadataBase` and SEO metadata in `ShohozKitchen_Client/src/app/layout.tsx`
 - Image `remotePatterns` hostnames in `ShohozKitchen_Client/next.config.ts`
-- Guest-email placeholder domain `@guest.shohozkitchen.com` (auth, order, user, fraud services)
+- Guest-email placeholder domain `@guest.trendyshopsbd.com` (auth, order, user, fraud services)
 - Default Terms/Privacy copy in `ShohozKitchen_Server/src/app/modules/siteContent/siteContent.service.ts`
 - `EMAIL_FROM` default in `ShohozKitchen_Server/src/app/config/index.ts`
 - Order number prefix `SK-` in the order service

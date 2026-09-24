@@ -29,7 +29,7 @@ async function checkAndCreateAdmin() {
             console.log('❌ No admin found! Creating one...\n');
             
             // Credentials come from .env — never from source, which is public.
-            const email = (process.env.ADMIN_EMAIL || 'admin@shohozkitchen.com').toLowerCase();
+            const email = (process.env.ADMIN_EMAIL || 'admin@trendyshopsbd.com').toLowerCase();
             const password = process.env.ADMIN_PASSWORD || '';
             if (password.length < 10) {
                 throw new Error('Set ADMIN_PASSWORD in .env (at least 10 characters) before creating the admin.');
@@ -38,7 +38,7 @@ async function checkAndCreateAdmin() {
                 email,
                 password,
                 firstName: 'Admin',
-                lastName: 'Shohoz Kitchen',
+                lastName: 'Trendy Shops',
                 phone: '+8801700000000',
                 role: 'admin',
                 status: 'active',

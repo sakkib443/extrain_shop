@@ -55,7 +55,7 @@ const QualityFeatures: React.FC = () => {
                             Quality Choices, Affordable Prices
                         </h2>
                         <p className="mt-2 text-sm text-gray-500 max-w-md mx-auto">
-                            Why thousands of customers trust Shohoz Kitchen for their shopping needs.
+                            Why thousands of customers trust Trendy Shops for their shopping needs.
                         </p>
                     </div>
 

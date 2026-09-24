@@ -31,7 +31,7 @@ export async function generateMetadata({
     if (!product) {
         return {
             title: 'Product',
-            description: 'Shop quality products at the best prices with Shohoz Kitchen.',
+            description: 'Shop quality products at the best prices with Trendy Shops.',
         };
     }
 
@@ -46,7 +46,7 @@ export async function generateMetadata({
     // Strip any HTML and trim to a sensible meta-description length.
     const description =
         rawDesc.replace(/<[^>]*>/g, '').replace(/\s+/g, ' ').trim().slice(0, 160) ||
-        `Buy ${name} at the best price on Shohoz Kitchen.`;
+        `Buy ${name} at the best price on Trendy Shops.`;
     const image: string | undefined = product.thumbnail || undefined;
 
     return {

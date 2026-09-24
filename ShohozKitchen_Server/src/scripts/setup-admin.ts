@@ -35,7 +35,7 @@ async function setupAdmin() {
                 email: ADMIN_EMAIL,
                 password: ADMIN_PASSWORD,
                 firstName: 'Admin',
-                lastName: 'Shohoz Kitchen',
+                lastName: 'Trendy Shops',
                 role: 'admin',
                 status: 'active',
                 isEmailVerified: true,

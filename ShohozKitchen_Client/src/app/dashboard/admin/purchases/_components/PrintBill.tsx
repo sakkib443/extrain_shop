@@ -221,7 +221,7 @@ function Bill({ purchase: p }: { purchase?: Purchase | null }) {
                 ))}
             </div>
             <p className="mt-6 text-[10px] text-gray-400">
-                {p ? `Printed from Shohoz Kitchen admin · ${p.reference}` : 'Shohoz Kitchen · purchase bill'} · amounts in BDT unless marked
+                {p ? `Printed from Trendy Shops admin · ${p.reference}` : 'Trendy Shops · purchase bill'} · amounts in BDT unless marked
             </p>
         </div>
     );

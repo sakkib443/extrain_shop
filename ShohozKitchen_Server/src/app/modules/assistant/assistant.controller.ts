@@ -6,7 +6,7 @@ import { askAssistant, ChatTurn } from './assistant.service';
 
 const AssistantController = {
     // POST /api/assistant/chat  { message, history? }
-    // Public endpoint used by the website ShohozBot widget.
+    // Public endpoint used by the website TrendyBot widget.
     chat: catchAsync(async (req: Request, res: Response) => {
         const message = typeof req.body?.message === 'string' ? req.body.message.trim() : '';
         if (!message) throw new AppError(400, 'A message is required.');

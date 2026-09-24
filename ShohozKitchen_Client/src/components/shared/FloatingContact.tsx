@@ -52,7 +52,7 @@ const FloatingContact: React.FC = () => {
     const [messages, setMessages] = useState<Msg[]>([
         {
             from: 'bot',
-            text: "Hi! 👋 I'm ShohozBot, your shopping assistant. How can I help you today?",
+            text: "Hi! 👋 I'm TrendyBot, your shopping assistant. How can I help you today?",
             actions: QUICK,
         },
     ]);
@@ -242,7 +242,7 @@ const FloatingContact: React.FC = () => {
                             <span className="absolute -bottom-0.5 -right-0.5 w-3 h-3 rounded-full bg-green-400 ring-2 ring-white" />
                         </div>
                         <div className="flex-1 min-w-0">
-                            <p className="text-sm font-bold leading-tight">Shohoz Kitchen Assistant</p>
+                            <p className="text-sm font-bold leading-tight">Trendy Shops Assistant</p>
                             <p className="text-[11px] opacity-90 flex items-center gap-1">
                                 <span className="w-1.5 h-1.5 rounded-full bg-green-300 inline-block" /> Online · typically replies instantly
                             </p>
@@ -260,7 +260,7 @@ const FloatingContact: React.FC = () => {
                                 <div className="max-w-[82%]">
                                     {m.from === 'bot' && (
                                         <div className="flex items-center gap-1.5 mb-1 text-[10px] font-semibold text-gray-400">
-                                            <FaRobot size={10} /> ShohozBot
+                                            <FaRobot size={10} /> TrendyBot
                                         </div>
                                     )}
                                     <div
@@ -324,7 +324,7 @@ const FloatingContact: React.FC = () => {
                                 <FiSend size={16} />
                             </button>
                         </div>
-                        <p className="text-[9.5px] text-gray-300 text-center mt-1.5">Powered by Shohoz Kitchen · we usually reply instantly</p>
+                        <p className="text-[9.5px] text-gray-300 text-center mt-1.5">Powered by Trendy Shops · we usually reply instantly</p>
                     </div>
                 </div>
             )}
@@ -338,7 +338,7 @@ const FloatingContact: React.FC = () => {
                     {!open && (
                         <div className={`absolute right-full mr-2 bg-gray-900 text-white text-xs font-semibold px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg transition-all duration-200 pointer-events-none
                             ${showHint ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0'}`}>
-                            {showHint ? '👋 Need help? Ask me!' : 'Chat with ShohozBot'}
+                            {showHint ? '👋 Need help? Ask me!' : 'Chat with TrendyBot'}
                             <div className="absolute right-[-4px] top-1/2 -translate-y-1/2 w-0 h-0 border-t-4 border-b-4 border-l-4 border-t-transparent border-b-transparent border-l-gray-900" />
                         </div>
                     )}

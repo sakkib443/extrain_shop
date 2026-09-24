@@ -26,3 +26,6 @@ Thumbs.db
 /*.jpg
 /*.jpeg
 /*.pdf
+
+# Local development database (scripts/dev-db.mjs)
+.devdb/

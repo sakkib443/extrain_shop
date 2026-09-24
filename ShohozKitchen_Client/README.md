@@ -1,6 +1,6 @@
 # ShohozKitchen_Client
 
-Frontend for **Shohoz Kitchen** — a multi-vendor e-commerce marketplace.
+Frontend for **Trendy Shops** — a multi-vendor e-commerce marketplace.
 
 Built with **Next.js 16**, **React 19**, **Tailwind CSS v4**, and **Redux Toolkit / RTK Query**.
 

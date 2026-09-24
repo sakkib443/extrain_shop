@@ -196,7 +196,7 @@ const Header: React.FC = () => {
         <header className="dz-header w-full sticky top-0 z-[60] lg:static bg-white lg:px-4 transition-colors duration-300">
 
             {/* Rows 1–3 share the charcoal backdrop; the ticker below sits on white. */}
-            <div className="dz-header-bg rounded-b-[12px] lg:rounded-none">
+            <div className="dz-header-bg">
 
             {/* ═══════════ 1 · UTILITY BAR ═══════════
                 Hairline strip of secondary links. Hidden below md, exactly as the

@@ -64,7 +64,7 @@ export type PrintStore = {
     logoUrl: string;
 };
 
-const DEFAULT_STORE_NAME = 'Shohoz Kitchen';
+const DEFAULT_STORE_NAME = 'Trendy Shops';
 /** The storefront's default logo is the full lockup; the round mark suits the print header. */
 const DEFAULT_LOGO = '/logo.svg';
 const MARK_LOGO = '/logo-mark.svg';

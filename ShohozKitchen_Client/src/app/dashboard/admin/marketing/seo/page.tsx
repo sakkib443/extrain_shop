@@ -16,16 +16,16 @@ export default function SeoPage() {
                         group="seo"
                         showStatus={false}
                         title="Home page"
-                        description="The home page uses these as they are; other pages show their own name followed by “| Shohoz Kitchen”."
+                        description="The home page uses these as they are; other pages show their own name followed by “| Trendy Shops”."
                         fields={[
                             {
                                 key: 'title', label: 'Title', required: true, maxLength: 60,
-                                placeholder: 'Shohoz Kitchen — Kitchenware online in Bangladesh',
+                                placeholder: 'Trendy Shops — Kitchenware online in Bangladesh',
                                 hint: 'The blue link in Google results. Around 50–60 characters shows in full.',
                             },
                             {
                                 key: 'description', label: 'Description', multiline: true, maxLength: 160,
-                                placeholder: 'Cookware, dinnerware and kitchen tools, delivered across Bangladesh…',
+                                placeholder: 'Lighting, fans, wiring and power backup, delivered across Bangladesh…',
                                 hint: 'The two lines under the link. Around 150–160 characters shows in full.',
                             },
                             {

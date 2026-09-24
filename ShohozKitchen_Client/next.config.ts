@@ -63,16 +63,16 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
-        hostname: "api.shohozkitchen.com",
+        hostname: "api.trendyshopsbd.com",
       },
       // Production domain (uploaded images are served from the same origin).
       {
         protocol: "https",
-        hostname: "shohozkitchen.com",
+        hostname: "trendyshopsbd.com",
       },
       {
         protocol: "https",
-        hostname: "www.shohozkitchen.com",
+        hostname: "www.trendyshopsbd.com",
       },
       {
         protocol: "http",

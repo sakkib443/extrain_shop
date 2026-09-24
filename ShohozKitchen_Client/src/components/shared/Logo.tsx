@@ -1,38 +1,41 @@
 import React from 'react';
 
 /**
- * The Shohoz Kitchen logo:  a brand-coloured disc holding a lidded pot with steam,
- * next to a two-tone "Shohoz Kitchen" wordmark.
+ * The Trendy Shops logo: a two-tone "Trendy Shops" wordmark with a small
+ * raised BD, and a rounded-square TS monogram for tight spaces.
  *
- * Drawn as inline SVG rather than loaded as an image so it stays crisp at every
- * size, picks up the site font, and can recolour itself for dark backgrounds.
- * The same artwork is available as static files for favicons / OG images:
- * `/logo.svg` (full lockup) and `/logo-mark.svg` (disc only).
+ * Drawn as inline SVG rather than loaded as an image so it stays crisp at
+ * every size, picks up the site font, and can recolour itself for dark
+ * backgrounds. The same artwork is available as static files for favicons /
+ * OG images: `/logo.svg` (full lockup) and `/logo-mark.svg` (monogram only).
  */
 
 const BRAND = 'var(--color-primary)';
 const INK = '#202020';
 
-/** The disc + pot, on its own 48×48 grid. */
-const Mark = () => (
+const FONT = "Poppins, 'Segoe UI', Arial, Helvetica, sans-serif";
+
+/** Lockup geometry — the wordmark occupies 0…198 on a 48-high grid. */
+const LOCKUP_W = 198;
+
+/** The TS monogram, on its own 48×48 grid. */
+const Mark = ({ light = false }: { light?: boolean }) => (
     <>
-        <circle cx="24" cy="24" r="24" fill={BRAND} />
-        {/* steam — two thin curls */}
-        <g fill="none" stroke="#ffffff" strokeWidth="2" strokeLinecap="round" opacity=".95">
-            <path d="M20.2 16.1c-1.5-1.1-1.5-2.6 0-3.7s1.5-2.6 0-3.7" />
-            <path d="M27.8 16.1c-1.5-1.1-1.5-2.6 0-3.7s1.5-2.6 0-3.7" />
-        </g>
-        {/* knob */}
-        <rect x="22.4" y="17.6" width="3.2" height="2.2" rx="1.1" fill="#ffffff" />
-        {/* lid — overhangs the body, so it reads as lid + handles in one shape */}
-        <rect x="12" y="20.4" width="24" height="3.2" rx="1.6" fill="#ffffff" />
-        {/* body — tapered, softly rounded base */}
-        <path d="M14.8 24.7h18.4l-1.35 9.1a3.4 3.4 0 0 1-3.36 2.9h-9a3.4 3.4 0 0 1-3.36-2.9z" fill="#ffffff" />
+        <rect x="0" y="0" width="48" height="48" rx="12" fill={light ? '#ffffff' : BRAND} />
+        <text
+            x="24"
+            y="33"
+            textAnchor="middle"
+            fontFamily={FONT}
+            fontSize="23"
+            fontWeight={800}
+            letterSpacing="-0.8"
+            fill={light ? BRAND : '#ffffff'}
+        >
+            TS
+        </text>
     </>
 );
-
-/** Lockup geometry — mark is 48 wide, wordmark starts at 56, total 232. */
-const LOCKUP_W = 232;
 
 interface LogoProps {
     /** Logo height in px. */
@@ -43,7 +46,7 @@ interface LogoProps {
     boxed?: boolean;
     /** Kept for API compatibility. */
     showTagline?: boolean;
-    /** Render just the disc, without the wordmark. */
+    /** Render just the monogram, without the wordmark. */
     iconOnly?: boolean;
     className?: string;
 }
@@ -55,8 +58,10 @@ const Logo: React.FC<LogoProps> = ({
     iconOnly = false,
     className,
 }) => {
+    // "Shops" stays brand-coloured on both grounds — that contrast against the
+    // first word is what makes the lockup read as a mark rather than as text.
     const wordFill = light ? '#ffffff' : INK;
-    const kitchenFill = light ? '#ffffff' : BRAND;
+    const bdFill = light ? '#ffffff' : BRAND;
 
     const svg = iconOnly ? (
         <svg
@@ -64,10 +69,10 @@ const Logo: React.FC<LogoProps> = ({
             height={size}
             width={size}
             role="img"
-            aria-label="Shohoz Kitchen"
+            aria-label="Trendy Shops"
             style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
         >
-            <Mark />
+            <Mark light={light} />
         </svg>
     ) : (
         <svg
@@ -75,20 +80,31 @@ const Logo: React.FC<LogoProps> = ({
             height={size}
             width={size * (LOCKUP_W / 48)}
             role="img"
-            aria-label="Shohoz Kitchen"
+            aria-label="Trendy Shops BD"
             style={{ display: 'block', maxWidth: '100%', height: 'auto' }}
         >
-            <Mark />
+            {/* One <text> with tspans: the BD rides on the flow of the word
+                before it, so it lands correctly whatever the font metrics are
+                rather than at a guessed x. */}
             <text
-                x="56"
-                y="31.5"
-                fontFamily="Poppins, 'Segoe UI', Arial, Helvetica, sans-serif"
-                fontSize="23"
-                fontWeight={700}
-                letterSpacing="-0.4"
+                x="0"
+                y="33"
+                fontFamily={FONT}
+                fontSize="26"
+                fontWeight={800}
+                letterSpacing="-0.7"
             >
-                <tspan fill={wordFill}>Shohoz</tspan>
-                <tspan fill={kitchenFill}> Kitchen</tspan>
+                <tspan fill={wordFill}>Trendy</tspan>
+                <tspan fill={BRAND}> Shops</tspan>
+                <tspan
+                    fill={bdFill}
+                    fontSize="10"
+                    fontWeight={700}
+                    letterSpacing="0.6"
+                    dy="-13"
+                >
+                    BD
+                </tspan>
             </text>
         </svg>
     );
@@ -117,7 +133,7 @@ const Logo: React.FC<LogoProps> = ({
     );
 };
 
-/** Compact brand mark — the disc only, for tight spaces. */
+/** Compact brand mark — the monogram only, for tight spaces. */
 export const LogoMark: React.FC<{ size?: number; light?: boolean; className?: string }> = (props) => (
     <Logo {...props} iconOnly />
 );

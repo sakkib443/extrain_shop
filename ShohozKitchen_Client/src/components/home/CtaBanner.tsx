@@ -21,14 +21,14 @@ const CtaBanner: React.FC = () => {
             {/* Content */}
             <div className="relative container mx-auto px-4 py-16 text-center">
                 <span className="inline-flex items-center gap-2 mb-4 px-3 py-1 rounded-full bg-white/10 text-[11px] font-semibold tracking-[0.18em] uppercase text-white/80">
-                    <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" /> Shop Shohoz Kitchen
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" /> Shop Trendy Shops
                 </span>
 
                 <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-3 tracking-tight">
-                    Everything your kitchen needs
+                    Everything your home needs
                 </h2>
                 <p className="text-sm md:text-base text-white/75 mb-8 max-w-xl mx-auto leading-relaxed">
-                    Cookware, dinnerware and kitchen tools at honest prices — delivered to your door anywhere in Bangladesh.
+                    Lighting, fans, wiring and power backup at honest prices — delivered to your door anywhere in Bangladesh.
                 </p>
 
                 <Link

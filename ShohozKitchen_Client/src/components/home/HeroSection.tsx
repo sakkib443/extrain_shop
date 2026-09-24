@@ -76,7 +76,7 @@ const HeroSection: React.FC = () => {
                         <img
                             key={currentSlide.imageUrl}
                             src={currentSlide.imageUrl}
-                            alt="Shohoz Kitchen Hero Banner"
+                            alt="Trendy Shops Hero Banner"
                             className="w-full h-full object-cover object-center transition-opacity duration-500 ease-in-out"
                             onError={(e) => {
                                 (e.currentTarget as HTMLImageElement).src = DEFAULT_HERO_IMAGE;

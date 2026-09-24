@@ -20,7 +20,7 @@ export function sendOrderToWhatsApp(data: {
         `${i + 1}. ${item.name || 'Product'} × ${item.quantity}${item.color ? ` (${item.color})` : ''}${item.size ? ` [${item.size}]` : ''}${item.price ? ` — ৳${item.price}` : ''}`
     ).join('\n');
 
-    const msg = `🛒 *New Order — Shohoz Kitchen*
+    const msg = `🛒 *New Order — Trendy Shops*
 
 👤 *Name:* ${data.customerName}
 📞 *Contact:* ${data.customerContact}
@@ -50,7 +50,7 @@ export function sendInquiryToWhatsApp(data: {
     if (!phone.replace(/[^0-9]/g, '')) return; // no WhatsApp number set yet
     const variantInfo = [data.color, data.size].filter(Boolean).join(' / ');
 
-    const msg = `❓ *New Inquiry — Shohoz Kitchen*
+    const msg = `❓ *New Inquiry — Trendy Shops*
 
 👤 *Name:* ${data.customerName}
 📞 *Contact:* ${data.customerContact}

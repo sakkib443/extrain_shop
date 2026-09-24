@@ -3,8 +3,8 @@ import type { Metadata } from 'next';
 import ShopBrowsePage from '@/components/shop/ShopBrowsePage';
 
 export const metadata: Metadata = {
-    title: "Browse All — Shohoz Kitchen",
-    description: "Browse the full Shohoz Kitchen catalog across every store and category. Filter by price, rating and availability, sort by best match or newest.",
+    title: "Browse All — Trendy Shops",
+    description: "Browse the full Trendy Shops catalog across every store and category. Filter by price, rating and availability, sort by best match or newest.",
     alternates: { canonical: "/shop" },
 };
 

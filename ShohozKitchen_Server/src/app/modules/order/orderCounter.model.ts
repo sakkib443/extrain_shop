@@ -18,12 +18,13 @@ export const OrderCounter = model('OrderCounter', orderCounterSchema);
 
 export const ORDER_COUNTER_ID = 'orderId';
 
-/** New orders are SK-0001…; orders placed before the rename keep their KM- numbers. */
-export const ORDER_ID_PREFIX = 'SK';
-/** Every prefix an order ID can carry. The numbers never overlap between them. */
-export const ORDER_ID_PREFIXES: readonly string[] = ['SK', 'KM'];
+/** New orders are TS-0001…; orders placed before a rename keep their old prefix. */
+export const ORDER_ID_PREFIX = 'TS';
+/** Every prefix an order ID can carry. The numbers never overlap between them, so
+    tracking and lookup keep working for orders numbered under an earlier name. */
+export const ORDER_ID_PREFIXES: readonly string[] = ['TS', 'SK', 'KM'];
 
-/** 50 → "SK-0050"; grows past four digits on its own (10000 → "SK-10000"). */
+/** 50 → "TS-0050"; grows past four digits on its own (10000 → "TS-10000"). */
 export const formatOrderId = (n: number, prefix: string = ORDER_ID_PREFIX) => `${prefix}-${String(n).padStart(4, '0')}`;
 
 /**
