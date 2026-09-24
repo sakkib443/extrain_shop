@@ -30,14 +30,13 @@ interface SeedCategory {
 }
 
 const CATEGORIES: SeedCategory[] = [
-    { name: 'Lighting', slug: 'lighting', icon: '💡', image: art("led-ceiling-panel-light-24w") },
-    { name: 'Fans & Cooling', slug: 'fans-cooling', icon: '🌀', image: art("bldc-ceiling-fan-56-remote") },
-    { name: 'Wiring & Switches', slug: 'wiring-switches', icon: '🔌', image: art("modular-switch-socket-board-6-gang") },
-    { name: 'Power & Backup', slug: 'power-backup', icon: '🔋', image: art("pure-sine-wave-ips-1200va") },
     { name: 'Phones', slug: 'phones', icon: '📱', image: photo('iphone-18-pro-max-glacier-42997c16-d21b-4695-80e0-ba0512072af7.webp') },
     { name: 'Laptops', slug: 'laptops', icon: '💻', image: photo('untitled-design-15-51286e58-7289-4db6-bf4d-65e985b6eac8.avif') },
     { name: 'Audio', slug: 'audio', icon: '🎧', image: photo('main-image-12001263-2026-09-05t204540551-33b5a647-7aff-4a33-a03b-ea308b46959c.webp') },
     { name: 'Wearables', slug: 'wearables', icon: '⌚', image: photo('main-image-12001263-2026-09-05t200956282-ca3010fd-0610-4895-a3e3-2e6596be3dea.webp') },
+    { name: 'Monitors', slug: 'monitors', icon: '🖥️', image: photo('benq-mobiuz-ex270m-27-gaming-monitor.webp') },
+    { name: 'Tablets', slug: 'tablets', icon: '📲', image: photo('samsung-galaxy-tab-s10-plus.webp') },
+    { name: 'Power & Backup', slug: 'power-backup', icon: '🔋', image: photo('benq-zowie-xl2566x-24-monitor.webp') },
 ];
 
 interface SeedProduct {
@@ -63,200 +62,6 @@ interface SeedProduct {
 }
 
 const PRODUCTS: SeedProduct[] = [
-    {
-        name: 'LED Ceiling Panel Light 24W',
-        slug: 'led-ceiling-panel-light-24w',
-        sold: 412, rating: 4.6, reviews: 58,
-        category: 'lighting',
-        brand: 'Lumex', model: 'LX-P24',
-        price: 1150, originalPrice: 1490, stock: 64,
-        shortDescription: 'Slim recessed panel with even, flicker-free daylight output.',
-        description:
-            '<p>A 24-watt recessed panel that spreads light evenly across a room instead of pooling it under the fixture. The driver is isolated and flicker-free, so it is comfortable to sit under for long stretches.</p>'
-            + '<ul><li>2200 lumens at 6500K daylight</li><li>Cut-out size 225 mm</li><li>Aluminium heat sink for a longer driver life</li></ul>',
-        specifications: [
-            { key: 'Power', value: '24 W' },
-            { key: 'Luminous flux', value: '2200 lm' },
-            { key: 'Colour temperature', value: '6500K daylight' },
-            { key: 'Input', value: '165–265 V AC' },
-        ],
-        warrantyMonths: 24,
-        isFeatured: true,
-    },
-    {
-        name: 'Smart Wi-Fi LED Bulb 9W (RGB + White)',
-        slug: 'smart-wifi-led-bulb-9w-rgb',
-        sold: 268, rating: 4.4, reviews: 41,
-        category: 'lighting',
-        brand: 'Lumex', model: 'LX-S9',
-        price: 690, originalPrice: 890, stock: 120,
-        shortDescription: 'Sixteen million colours, schedules and voice control over 2.4 GHz Wi-Fi.',
-        description:
-            '<p>Pairs over 2.4 GHz Wi-Fi with no hub. Set a warm dim for the evening, a daylight white for work, or a colour scene — and put any of them on a schedule.</p>'
-            + '<ul><li>Works with Google Assistant and Alexa</li><li>Remembers its last state after a power cut</li><li>E27 base</li></ul>',
-        specifications: [
-            { key: 'Power', value: '9 W' },
-            { key: 'Base', value: 'E27' },
-            { key: 'Connectivity', value: 'Wi-Fi 2.4 GHz' },
-            { key: 'Colours', value: 'RGB + 2700–6500K' },
-        ],
-        warrantyMonths: 12,
-        isFeatured: true,
-    },
-    {
-        name: 'BLDC Ceiling Fan 56" with Remote',
-        slug: 'bldc-ceiling-fan-56-remote',
-        sold: 196, rating: 4.8, reviews: 73,
-        category: 'fans-cooling',
-        brand: 'Aeromax', model: 'AM-BLDC56',
-        price: 8950, originalPrice: 10900, stock: 22,
-        shortDescription: 'Runs on 32 watts — roughly a third of a conventional fan.',
-        description:
-            '<p>A brushless motor draws about 32 W at full speed where an induction fan of the same sweep takes near 80 W. On an inverter or solar backup that difference decides how long the fan keeps running.</p>'
-            + '<ul><li>Six speeds, remote with timer</li><li>Near-silent below speed four</li><li>Rust-treated blades</li></ul>',
-        specifications: [
-            { key: 'Sweep', value: '1400 mm (56")' },
-            { key: 'Power', value: '32 W' },
-            { key: 'Air delivery', value: '230 m³/min' },
-            { key: 'Speeds', value: '6, remote controlled' },
-        ],
-        warrantyMonths: 36,
-        isFeatured: true,
-    },
-    {
-        name: 'Rechargeable Table Fan 12"',
-        slug: 'rechargeable-table-fan-12',
-        sold: 143, rating: 4.3, reviews: 29,
-        category: 'fans-cooling',
-        brand: 'Aeromax', model: 'AM-RT12',
-        price: 3450, originalPrice: 4200, stock: 38,
-        shortDescription: 'Eight hours on a charge, with a USB port for a phone.',
-        description:
-            '<p>Built for load shedding: a full charge runs the fan for about eight hours on low, and the built-in USB-A port will bring a phone back from flat.</p>'
-            + '<ul><li>7800 mAh lithium pack</li><li>Three speeds, adjustable tilt</li><li>Charges while running</li></ul>',
-        specifications: [
-            { key: 'Blade size', value: '12 inch' },
-            { key: 'Battery', value: '7800 mAh Li-ion' },
-            { key: 'Runtime', value: 'Up to 8 h on low' },
-            { key: 'Extras', value: 'USB-A output, LED light' },
-        ],
-        warrantyMonths: 12,
-    },
-    {
-        name: 'Modular Switch & Socket Board (6 Gang)',
-        slug: 'modular-switch-socket-board-6-gang',
-        sold: 87, rating: 4.5, reviews: 18,
-        category: 'wiring-switches',
-        brand: 'Voltek', model: 'VT-M6',
-        price: 1690, originalPrice: null, stock: 45,
-        shortDescription: 'Six modules on a shockproof polycarbonate plate.',
-        description:
-            '<p>Polycarbonate plate with a captive-screw frame, so the modules stay square after years of use. Each switch is rated 10 A and the sockets take both round and flat pins.</p>'
-            + '<ul><li>Fits a standard 6-module box</li><li>Shuttered sockets</li><li>Silver-alloy contacts</li></ul>',
-        specifications: [
-            { key: 'Modules', value: '6' },
-            { key: 'Switch rating', value: '10 A, 240 V' },
-            { key: 'Material', value: 'Polycarbonate' },
-            { key: 'Finish', value: 'Matte white' },
-        ],
-        warrantyMonths: 24,
-    },
-    {
-        name: 'Copper House Wire 1.5 mm² — 100 m Coil',
-        slug: 'copper-house-wire-1-5mm-100m',
-        sold: 64, rating: 4.7, reviews: 12,
-        category: 'wiring-switches',
-        brand: 'Voltek', model: 'VT-W15',
-        price: 4850, originalPrice: 5600, stock: 30,
-        shortDescription: '99.97% pure electrolytic copper, FR-PVC insulated.',
-        description:
-            '<p>Single-core wire for lighting circuits. The conductor is 99.97% electrolytic copper and the sheath is flame-retardant PVC that self-extinguishes rather than carrying a fire along the conduit.</p>'
-            + '<ul><li>Suitable up to 16 A lighting circuits</li><li>Heat resistant to 70°C</li><li>ISI-pattern colour coding</li></ul>',
-        specifications: [
-            { key: 'Cross-section', value: '1.5 mm²' },
-            { key: 'Length', value: '100 m' },
-            { key: 'Conductor', value: '99.97% electrolytic copper' },
-            { key: 'Insulation', value: 'FR-PVC, 70°C' },
-        ],
-        warrantyMonths: 0,
-    },
-    {
-        name: 'Circuit Breaker MCB 32A Single Pole',
-        slug: 'circuit-breaker-mcb-32a-single-pole',
-        sold: 231, rating: 4.4, reviews: 26,
-        category: 'wiring-switches',
-        brand: 'Voltek', model: 'VT-C32',
-        price: 540, originalPrice: 720, stock: 88,
-        shortDescription: 'C-curve breaker for socket and appliance circuits.',
-        description:
-            '<p>A C-curve miniature circuit breaker: it rides out the inrush of a motor or a compressor starting, then trips quickly on a genuine fault. DIN-rail mount.</p>'
-            + '<ul><li>6 kA breaking capacity</li><li>Trip-free mechanism — it opens even if the toggle is held</li><li>35 mm DIN rail</li></ul>',
-        specifications: [
-            { key: 'Rating', value: '32 A' },
-            { key: 'Curve', value: 'C' },
-            { key: 'Breaking capacity', value: '6 kA' },
-            { key: 'Poles', value: 'Single' },
-        ],
-        warrantyMonths: 12,
-    },
-    {
-        name: 'Pure Sine Wave IPS 1200VA',
-        slug: 'pure-sine-wave-ips-1200va',
-        sold: 58, rating: 4.9, reviews: 34,
-        category: 'power-backup',
-        brand: 'PowerCore', model: 'PC-1200S',
-        price: 18900, originalPrice: 22500, stock: 12,
-        shortDescription: 'Clean sine output that fridges and PCs will actually tolerate.',
-        description:
-            '<p>A square-wave inverter makes a fridge compressor and a desktop PSU run hot and hum. This one puts out a true sine wave, so sensitive loads behave exactly as they do on mains.</p>'
-            + '<ul><li>Transfer time under 10 ms</li><li>Overload, short-circuit and deep-discharge protection</li><li>LCD panel showing load and battery state</li></ul>',
-        specifications: [
-            { key: 'Capacity', value: '1200 VA / 960 W' },
-            { key: 'Waveform', value: 'Pure sine' },
-            { key: 'Transfer time', value: '< 10 ms' },
-            { key: 'Battery support', value: '12 V, external' },
-        ],
-        warrantyMonths: 24,
-        isFeatured: true,
-    },
-    {
-        name: 'Tubular Battery 150Ah',
-        slug: 'tubular-battery-150ah',
-        sold: 41, rating: 4.6, reviews: 21,
-        category: 'power-backup',
-        brand: 'PowerCore', model: 'PC-T150',
-        price: 21500, originalPrice: null, stock: 9,
-        shortDescription: 'Deep-cycle tubular plates built for daily load shedding.',
-        description:
-            '<p>Tubular plates tolerate being drained and refilled every day, which is what kills a flat-plate battery inside a year. Expect five to six years of daily cycling with the electrolyte topped up.</p>'
-            + '<ul><li>Low water loss, topping up roughly twice a year</li><li>Handles deep discharge without plate damage</li><li>Float indicator for electrolyte level</li></ul>',
-        specifications: [
-            { key: 'Capacity', value: '150 Ah at C20' },
-            { key: 'Voltage', value: '12 V' },
-            { key: 'Plate type', value: 'Tubular, deep cycle' },
-            { key: 'Weight', value: '48 kg' },
-        ],
-        warrantyMonths: 36,
-    },
-    {
-        name: 'Automatic Voltage Stabiliser 5kVA',
-        slug: 'automatic-voltage-stabiliser-5kva',
-        sold: 76, rating: 4.5, reviews: 19,
-        category: 'power-backup',
-        brand: 'PowerCore', model: 'PC-AVR5',
-        price: 12400, originalPrice: 14900, stock: 17,
-        shortDescription: 'Holds output steady through the sags a weak line delivers.',
-        description:
-            '<p>Where the incoming line sags to 140 V in the evening and spikes overnight, a stabiliser is what keeps an air conditioner or a refrigerator alive. This one corrects anything from 140 V to 280 V back to a usable output.</p>'
-            + '<ul><li>Servo-controlled, ±2% output regulation</li><li>Time-delay restart protects a compressor</li><li>Copper-wound transformer</li></ul>',
-        specifications: [
-            { key: 'Capacity', value: '5 kVA' },
-            { key: 'Input range', value: '140–280 V' },
-            { key: 'Output regulation', value: '±2%' },
-            { key: 'Cooling', value: 'Natural convection' },
-        ],
-        warrantyMonths: 24,
-    },
 
     /* ── Gadgets, on supplied photography ──────────────────────────────── */
 
@@ -363,11 +168,291 @@ const PRODUCTS: SeedProduct[] = [
         ],
         warrantyMonths: 12,
     },
+
+    /* ── Monitors ──────────────────────────────────────────────────────── */
+
+    {
+        name: 'BenQ MOBIUZ EX270M 27" 240Hz Gaming Monitor',
+        slug: 'benq-mobiuz-ex270m-27-gaming-monitor',
+        sold: 63, rating: 4.8, reviews: 31,
+        category: 'monitors',
+        brand: 'BenQ', model: 'MOBIUZ EX270M',
+        price: 46500, originalPrice: 54000, stock: 11,
+        shortDescription: '240Hz IPS with HDRi — fast enough that the panel stops being the limit.',
+        description:
+            '<p>240Hz on an IPS panel, so the viewing angles survive the refresh rate. BenQ\'s HDRi reads the room and lifts shadow detail rather than crushing it, which is the difference between seeing someone in a dark corner and not.</p>'
+            + '<ul><li>27" FHD IPS, 240Hz, 1ms</li><li>HDRi with an ambient light sensor</li><li>treVolo 2.1 speakers built in</li></ul>',
+        image: photo('benq-mobiuz-ex270m-27-gaming-monitor.webp'),
+        specifications: [
+            { key: 'Size', value: '27 inch' },
+            { key: 'Refresh rate', value: '240 Hz' },
+            { key: 'Panel', value: 'IPS, 1ms MPRT' },
+            { key: 'Inputs', value: '2× HDMI 2.0, DisplayPort 1.4' },
+        ],
+        warrantyMonths: 36,
+        isFeatured: true,
+    },
+    {
+        name: 'BenQ ZOWIE XL2566X+ 24" 400Hz Esports Monitor',
+        slug: 'benq-zowie-xl2566x-24-monitor',
+        sold: 28, rating: 4.9, reviews: 17,
+        category: 'monitors',
+        brand: 'BenQ ZOWIE', model: 'XL2566X+',
+        price: 89900, originalPrice: 99000, stock: 6,
+        shortDescription: '400Hz with DyAc 2 — built for competitive play, not for looking pretty.',
+        description:
+            '<p>A tournament panel. DyAc 2 clears the smear on fast horizontal movement, which is what lets you keep tracking through a spray instead of guessing where the target went.</p>'
+            + '<ul><li>24.1" TN, 400Hz refresh</li><li>DyAc 2 motion clarity</li><li>Height, tilt, swivel and pivot adjustment</li></ul>',
+        image: photo('benq-zowie-xl2566x-24-monitor.webp'),
+        specifications: [
+            { key: 'Size', value: '24.1 inch' },
+            { key: 'Refresh rate', value: '400 Hz' },
+            { key: 'Panel', value: 'TN, 0.5ms GtG' },
+            { key: 'Feature', value: 'DyAc 2' },
+        ],
+        warrantyMonths: 36,
+    },
+    {
+        name: 'Aiwa MD2419-V 24" 200Hz FHD IPS Monitor',
+        slug: 'aiwa-md2419v-24-monitor',
+        sold: 96, rating: 4.3, reviews: 24,
+        category: 'monitors',
+        brand: 'Aiwa', model: 'MD2419-V',
+        price: 14900, originalPrice: 17500, stock: 26,
+        shortDescription: '200Hz at a price where 75Hz is the norm.',
+        description:
+            '<p>The sensible first monitor: an IPS panel at 200Hz, which is well past the point where most people stop noticing, for roughly what a 75Hz screen used to cost.</p>'
+            + '<ul><li>23.8" FHD IPS, 200Hz</li><li>Adaptive-Sync</li><li>HDMI and DisplayPort</li></ul>',
+        image: photo('aiwa-md2419v-24-monitor.avif'),
+        specifications: [
+            { key: 'Size', value: '23.8 inch' },
+            { key: 'Refresh rate', value: '200 Hz' },
+            { key: 'Panel', value: 'IPS, 1ms' },
+            { key: 'Resolution', value: '1920 × 1080' },
+        ],
+        warrantyMonths: 24,
+    },
+
+    /* ── Tablets ───────────────────────────────────────────────────────── */
+
+    {
+        name: 'Samsung Galaxy Tab S10+ — Moonstone Gray',
+        slug: 'samsung-galaxy-tab-s10-plus',
+        sold: 84, rating: 4.7, reviews: 42,
+        category: 'tablets',
+        brand: 'Samsung', model: 'Galaxy Tab S10+',
+        price: 124900, originalPrice: 139900, stock: 13,
+        shortDescription: '12.4" AMOLED with the S Pen in the box — no extra purchase.',
+        description:
+            '<p>A 12.4" AMOLED at 120Hz, and the S Pen ships with it rather than being sold separately. DeX turns it into a desktop when you attach a keyboard, which is the part that makes it a laptop substitute rather than a large phone.</p>'
+            + '<ul><li>12.4" Dynamic AMOLED 2X, 120Hz</li><li>S Pen included, no charging needed</li><li>IP68 — rated for dust and water</li></ul>',
+        image: photo('samsung-galaxy-tab-s10-plus.webp'),
+        specifications: [
+            { key: 'Display', value: '12.4" AMOLED, 120Hz' },
+            { key: 'Storage', value: '256 GB, microSD expandable' },
+            { key: 'Battery', value: '10,090 mAh' },
+            { key: 'Extras', value: 'S Pen in box, DeX mode' },
+        ],
+        warrantyMonths: 12,
+        isFeatured: true,
+    },
+    {
+        name: 'Xiaomi Pad 7 — Black',
+        slug: 'xiaomi-pad-7',
+        sold: 137, rating: 4.5, reviews: 58,
+        category: 'tablets',
+        brand: 'Xiaomi', model: 'Pad 7',
+        price: 38900, originalPrice: 44500, stock: 21,
+        shortDescription: 'An 11.2" 3.2K 144Hz panel at a mid-range price.',
+        description:
+            '<p>The panel is the reason to buy this one: 3.2K at 144Hz on an 11.2" screen, which is a specification that normally sits two price brackets higher.</p>'
+            + '<ul><li>11.2" 3.2K LCD, 144Hz</li><li>Snapdragon 7+ Gen 3</li><li>8,850 mAh with 45W charging</li></ul>',
+        image: photo('xiaomi-pad-7.webp'),
+        specifications: [
+            { key: 'Display', value: '11.2" 3.2K, 144Hz' },
+            { key: 'Processor', value: 'Snapdragon 7+ Gen 3' },
+            { key: 'Storage', value: '128 GB' },
+            { key: 'Battery', value: '8,850 mAh, 45W' },
+        ],
+        warrantyMonths: 12,
+    },
+
+    /* ── Audio ─────────────────────────────────────────────────────────── */
+
+    {
+        name: 'Haylou S30 ANC Headphone — Black',
+        slug: 'haylou-s30-anc-headphone',
+        sold: 214, rating: 4.4, reviews: 76,
+        category: 'audio',
+        brand: 'Haylou', model: 'S30',
+        price: 4650, originalPrice: 5900, stock: 48,
+        shortDescription: 'Over-ear ANC with 60 hours between charges.',
+        description:
+            '<p>Sixty hours is the headline, and it is the right one — these are for people who forget to charge things. Active noise cancellation takes the edge off a bus or an office without the pressure feeling of the pricier sets.</p>'
+            + '<ul><li>Hybrid ANC, up to 35dB</li><li>60 h playback, 10 min for 8 h</li><li>Bluetooth 5.4, multipoint pairing</li></ul>',
+        image: photo('haylou-s30-anc-headphone.webp'),
+        specifications: [
+            { key: 'Type', value: 'Over-ear, closed back' },
+            { key: 'ANC', value: 'Hybrid, up to 35 dB' },
+            { key: 'Battery', value: '60 h (ANC off)' },
+            { key: 'Bluetooth', value: '5.4, multipoint' },
+        ],
+        warrantyMonths: 12,
+    },
+    {
+        name: 'Haylou S35 ANC Headphone — Purple',
+        slug: 'haylou-s35-anc-headphone',
+        sold: 129, rating: 4.5, reviews: 44,
+        category: 'audio',
+        brand: 'Haylou', model: 'S35',
+        price: 5900, originalPrice: 7200, stock: 34,
+        shortDescription: 'LDAC and 40mm drivers — the pair to buy if the source is lossless.',
+        description:
+            '<p>LDAC support means a high-bitrate stream actually reaches the drivers rather than being squeezed through SBC first. Worth it only if the phone and the library can feed it; otherwise the S30 is the better buy.</p>'
+            + '<ul><li>40 mm dynamic drivers</li><li>LDAC and Hi-Res Audio Wireless</li><li>Hybrid ANC with transparency</li></ul>',
+        image: photo('haylou-s35-anc-headphone.webp'),
+        specifications: [
+            { key: 'Drivers', value: '40 mm dynamic' },
+            { key: 'Codecs', value: 'LDAC, AAC, SBC' },
+            { key: 'Battery', value: '50 h (ANC off)' },
+            { key: 'Weight', value: '265 g' },
+        ],
+        warrantyMonths: 12,
+    },
+    {
+        name: 'Haylou X1 Pro TWS Earbuds',
+        slug: 'haylou-x1-pro-tws-earbuds',
+        sold: 302, rating: 4.3, reviews: 118,
+        category: 'audio',
+        brand: 'Haylou', model: 'X1 Pro',
+        price: 2450, originalPrice: 3200, stock: 76,
+        shortDescription: 'In-ear ANC and a 45ms game mode, under three thousand.',
+        description:
+            '<p>The low-latency mode is the part that matters here — 45ms is close enough that footsteps land with the picture, which most buds at this price cannot manage.</p>'
+            + '<ul><li>ANC up to 42dB</li><li>45 ms low-latency game mode</li><li>IPX4, 30 h with the case</li></ul>',
+        image: photo('haylou-x1-pro-tws-earbuds.avif'),
+        specifications: [
+            { key: 'Type', value: 'In-ear TWS' },
+            { key: 'ANC', value: 'Up to 42 dB' },
+            { key: 'Latency', value: '45 ms game mode' },
+            { key: 'Battery', value: '30 h with case' },
+        ],
+        warrantyMonths: 12,
+        isFeatured: true,
+    },
+
+    /* ── Wearables ─────────────────────────────────────────────────────── */
+
+    {
+        name: 'Apple Watch Ultra — Orange Alpine Loop',
+        slug: 'apple-watch-ultra-alpine-loop',
+        sold: 61, rating: 4.9, reviews: 37,
+        category: 'wearables',
+        brand: 'Apple', model: 'Watch Ultra',
+        price: 98500, originalPrice: 112000, stock: 8,
+        shortDescription: 'Titanium, 100m water resistant, and it runs for two days.',
+        description:
+            '<p>Built for conditions the standard Watch is not: a titanium case, a display bright enough to read in direct sun, and a battery that lasts a long weekend rather than a day. The Alpine Loop has no buckle to work loose.</p>'
+            + '<ul><li>49 mm titanium case</li><li>3000 nits, readable in sunlight</li><li>Up to 36 h, 72 h in low power</li></ul>',
+        image: photo('apple-watch-ultra-alpine-loop.webp'),
+        specifications: [
+            { key: 'Case', value: '49 mm titanium' },
+            { key: 'Display', value: '3000 nits peak' },
+            { key: 'Water resistance', value: '100 m, EN13319' },
+            { key: 'Battery', value: '36 h, 72 h low power' },
+        ],
+        warrantyMonths: 12,
+        isFeatured: true,
+    },
+
+    /* ── Power & Backup ────────────────────────────────────────────────── */
+
+    {
+        name: 'Pure Sine Wave IPS 1200VA',
+        slug: 'pure-sine-wave-ips-1200va',
+        sold: 58, rating: 4.9, reviews: 34,
+        category: 'power-backup',
+        brand: 'PowerCore', model: 'PC-1200S',
+        price: 18900, originalPrice: 22500, stock: 12,
+        shortDescription: 'Clean sine output that fridges and PCs will actually tolerate.',
+        description:
+            '<p>A square-wave inverter makes a fridge compressor and a desktop PSU run hot and hum. This one puts out a true sine wave, so sensitive loads behave exactly as they do on mains.</p>'
+            + '<ul><li>Transfer time under 10 ms</li><li>Overload, short-circuit and deep-discharge protection</li><li>LCD panel showing load and battery state</li></ul>',
+        specifications: [
+            { key: 'Capacity', value: '1200 VA / 960 W' },
+            { key: 'Waveform', value: 'Pure sine' },
+            { key: 'Transfer time', value: '< 10 ms' },
+            { key: 'Battery support', value: '12 V, external' },
+        ],
+        warrantyMonths: 24,
+        isFeatured: true,
+    },
+    {
+        name: 'Tubular Battery 150Ah',
+        slug: 'tubular-battery-150ah',
+        sold: 41, rating: 4.6, reviews: 21,
+        category: 'power-backup',
+        brand: 'PowerCore', model: 'PC-T150',
+        price: 21500, originalPrice: null, stock: 9,
+        shortDescription: 'Deep-cycle tubular plates built for daily load shedding.',
+        description:
+            '<p>Tubular plates tolerate being drained and refilled every day, which is what kills a flat-plate battery inside a year. Expect five to six years of daily cycling with the electrolyte topped up.</p>'
+            + '<ul><li>Low water loss, topping up roughly twice a year</li><li>Handles deep discharge without plate damage</li><li>Float indicator for electrolyte level</li></ul>',
+        specifications: [
+            { key: 'Capacity', value: '150 Ah at C20' },
+            { key: 'Voltage', value: '12 V' },
+            { key: 'Plate type', value: 'Tubular, deep cycle' },
+            { key: 'Weight', value: '48 kg' },
+        ],
+        warrantyMonths: 36,
+    },
+    {
+        name: 'Automatic Voltage Stabiliser 5kVA',
+        slug: 'automatic-voltage-stabiliser-5kva',
+        sold: 76, rating: 4.5, reviews: 19,
+        category: 'power-backup',
+        brand: 'PowerCore', model: 'PC-AVR5',
+        price: 12400, originalPrice: 14900, stock: 17,
+        shortDescription: 'Holds output steady through the sags a weak line delivers.',
+        description:
+            '<p>Where the incoming line sags to 140 V in the evening and spikes overnight, a stabiliser is what keeps an air conditioner or a refrigerator alive. This one corrects anything from 140 V to 280 V back to a usable output.</p>'
+            + '<ul><li>Servo-controlled, ±2% output regulation</li><li>Time-delay restart protects a compressor</li><li>Copper-wound transformer</li></ul>',
+        specifications: [
+            { key: 'Capacity', value: '5 kVA' },
+            { key: 'Input range', value: '140–280 V' },
+            { key: 'Output regulation', value: '±2%' },
+            { key: 'Cooling', value: 'Natural convection' },
+        ],
+        warrantyMonths: 24,
+    },
+];
+
+/**
+ * Categories and products this seed used to create and no longer should.
+ *
+ * Upserting cannot remove anything, so dropping an entry from the lists above
+ * would leave it behind in the database forever. Naming it here retires it —
+ * and the list stays as a record of what was once seeded, so a future run
+ * against an old database still cleans up.
+ */
+const RETIRED_CATEGORIES = ['lighting', 'fans-cooling', 'wiring-switches'];
+const RETIRED_PRODUCTS = [
+    'led-ceiling-panel-light-24w', 'smart-wifi-led-bulb-9w-rgb',
+    'bldc-ceiling-fan-56-remote', 'rechargeable-table-fan-12',
+    'modular-switch-socket-board-6-gang', 'copper-house-wire-1-5mm-100m',
+    'circuit-breaker-mcb-32a-single-pole',
 ];
 
 async function main() {
     await mongoose.connect(config.database_url as string);
     console.log('connected\n');
+
+    // ── Retire what this seed no longer owns ──────────────────────────────
+    const droppedProducts = await Product.deleteMany({ slug: { $in: RETIRED_PRODUCTS } });
+    const droppedCategories = await Category.deleteMany({ slug: { $in: RETIRED_CATEGORIES } });
+    if (droppedProducts.deletedCount || droppedCategories.deletedCount) {
+        console.log(`retired   ${droppedProducts.deletedCount} products, ${droppedCategories.deletedCount} categories\n`);
+    }
 
     // ── Categories ────────────────────────────────────────────────────────
     const idBySlug = new Map<string, mongoose.Types.ObjectId>();
