@@ -193,10 +193,8 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
     return (
         <div ref={rootRef} className="relative w-full">
             <div
-                className={`flex items-center w-full transition-shadow duration-200 focus-within:shadow-[0_0_0_3px_rgba(var(--color-primary-rgb),0.10)] ${
-                    isMobile ? 'h-[44px] rounded-[10px] px-2' : 'h-[54px] rounded-[10px] px-3'
-                }`}
-                style={{ background: '#ffffff', border: '1px solid rgba(0,0,0,0.06)' }}
+                className={`hd-pill flex items-center w-full transition-shadow duration-200 focus-within:shadow-[0_0_0_3px_rgba(var(--color-primary-rgb),0.10)] ${ isMobile ? 'h-11 rounded-xl px-1' : 'h-[var(--hd-control)] rounded-xl px-1.5' }`}
+                style={{ background: '#ffffff' }}
             >
                 {leading}
 
@@ -222,9 +220,7 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
                         else if (e.key === 'Escape') setOpen(false);
                     }}
                     placeholder={placeholder}
-                    className={`flex-1 h-full text-gray-700 placeholder-gray-400 focus:outline-none text-sm bg-transparent ${
-                        isMobile ? 'px-2.5' : 'px-3'
-                    }`}
+                    className={`flex-1 h-full text-gray-700 placeholder-gray-400 focus:outline-none text-sm bg-transparent ${ isMobile ? 'px-2.5' : 'px-3' }`}
                     aria-label="Search"
                     autoComplete="off"
                 />
@@ -236,9 +232,7 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
                         onClick={startVoice}
                         aria-label={listening ? 'Stop voice search' : 'Search by voice'}
                         title={listening ? 'Listening… click to stop' : 'Search by voice'}
-                        className={`shrink-0 flex items-center justify-center rounded-full transition-colors ${
-                            isMobile ? 'w-8 h-8 mr-1' : 'w-9 h-9 mr-1.5'
-                        } ${listening ? 'animate-pulse' : 'hover:bg-[var(--color-primary-lightest)]'}`}
+                        className={`shrink-0 flex items-center justify-center rounded-full transition-colors ${ isMobile ? 'w-8 h-8 mr-1' : 'w-9 h-9 mr-1.5' } ${listening ? 'animate-pulse' : 'hover:bg-[var(--color-primary-lightest)]'}`}
                         style={listening ? { background: 'var(--color-primary)', color: '#fff' } : { color: 'var(--color-primary)' }}
                     >
                         <FiMic size={isMobile ? 15 : 17} strokeWidth={2} />

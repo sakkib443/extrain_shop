@@ -68,6 +68,7 @@ const Header: React.FC = () => {
     const [isSearchCatOpen, setIsSearchCatOpen] = useState(false);
     const [selectedSearchCat, setSelectedSearchCat] = useState<Category | null>(null);
     const [isExploreOpen, setIsExploreOpen] = useState(false);
+    const [mounted, setMounted] = useState(false);
 
     const profileRef = useRef<HTMLDivElement>(null);
     const searchCatRef = useRef<HTMLDivElement>(null);
@@ -90,6 +91,8 @@ const Header: React.FC = () => {
 
     /** The category bar shows the first eight; the rest live under EXPLORE ALL. */
     const barCategories = categories.slice(0, 8);
+
+    useEffect(() => { setMounted(true); }, []);
 
     useEffect(() => {
         const h = (e: MouseEvent) => {
@@ -121,17 +124,34 @@ const Header: React.FC = () => {
 
     /* ── Shared bits ─────────────────────────────────────────────────── */
 
-    /** The 54×54 rounded-square that the action icons sit in. */
-    const iconBtn = "w-[54px] h-[54px] rounded-[12px] flex items-center justify-center transition-all duration-200 shrink-0";
+    /** One container for every row. Each row used to carry its own max-width
+        and padding (1420/px-12, 1400/px-9, 1344/px-2), which staggered the
+        three left edges by up to 40px and was what made the header look
+        unaligned. One rule now, so the rows sit in a single column. */
+    const SHELL = 'max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-10';
+
+    /** The square the action icons sit in. Height comes from --hd-control, the
+        same token the search field and EXPLORE ALL use, so all three line up. */
+    const iconBtn = "hd-pill w-[var(--hd-control)] h-[var(--hd-control)] rounded-xl flex items-center justify-center transition-all duration-200 shrink-0";
+
+    /** Counts come back from localStorage on the client, so the server renders
+        zero and the first client render would not. Holding them until after
+        mount keeps both trees identical and avoids a hydration mismatch. */
+    const countBadge = (n: number, bg: string) => mounted && n > 0 ? (
+        <span
+            className="absolute -top-1.5 -right-1.5 min-w-[18px] h-[18px] px-1 rounded-full text-[10px] font-bold text-white flex items-center justify-center ring-2 ring-white"
+            style={{ background: bg }}
+        >
+            {n > 99 ? '99+' : n}
+        </span>
+    ) : null;
 
     const renderCategorySelector = (isMobile: boolean) => (
         <div className="relative shrink-0" ref={isMobile ? mobileSearchCatRef : searchCatRef}>
             <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); setIsSearchCatOpen((prev) => !prev); }}
-                className={`flex items-center gap-1.5 ${isMobile ? 'ml-1 px-2 h-[32px] text-xs' : 'ml-1 px-2.5 h-[36px] text-[13px]'
-                    } font-semibold whitespace-nowrap transition-colors rounded-lg cursor-pointer select-none`}
-                style={{ background: 'var(--color-soft)', border: '1px solid var(--color-soft-border)', color: 'var(--color-text-primary)' }}
+                className={`flex items-center gap-1.5 ${isMobile ? 'pl-2.5 pr-2 h-8 text-xs' : 'pl-3.5 pr-2.5 h-9 text-[13px]' } font-semibold whitespace-nowrap transition-colors rounded-lg cursor-pointer select-none text-[var(--color-text-primary)] hover:bg-black/[0.04]`}
                 title="Select category to filter"
             >
                 <FiGlobe size={13} strokeWidth={2} style={{ color: 'var(--hd-gold-deep)' }} className="shrink-0" />
@@ -170,12 +190,7 @@ const Header: React.FC = () => {
         </div>
     );
 
-    const cartBadge = (
-        <span className="absolute -top-1 -right-1 text-white text-[9px] min-w-[17px] h-[17px] px-0.5 rounded-full flex items-center justify-center font-bold ring-2 ring-white"
-            style={{ background: 'var(--color-sale)' }}>
-            {cartItems.length > 99 ? '99+' : cartItems.length}
-        </span>
-    );
+    const cartBadge = countBadge(cartItems.length, 'var(--color-sale)');
 
     return (
         <header className="dz-header w-full sticky top-0 z-[60] lg:static bg-white lg:px-4 transition-colors duration-300">
@@ -187,7 +202,7 @@ const Header: React.FC = () => {
                 Hairline strip of secondary links. Hidden below md, exactly as the
                 reference does — on a phone this row is pure noise. */}
             <div className="hidden md:block">
-                <div className="max-w-[1420px] mx-auto py-2 px-12 rounded-b-[10px] flex items-center justify-between bg-white">
+                <div className={`${SHELL} h-9 rounded-b-[10px] flex items-center justify-between bg-white`}>
 
                     <nav className="flex items-center gap-6">
                         {[{ href: '/expert', label: 'Expert Advice' }, { href: '/cost-calculator', label: 'Cost Calculator' }].map(l => (
@@ -217,20 +232,18 @@ const Header: React.FC = () => {
             {/* ═══════════ 2 · MAIN BAR ═══════════
                 Logo · quick links · search (takes the slack) · action squares. */}
             <div className="border-b border-white/5">
-                <div className="max-w-[1400px] mx-auto lg:px-9 px-4">
+                <div className={SHELL}>
 
-                    <div className="hidden md:flex items-center gap-6 py-4">
+                    <div className="hidden md:flex items-center gap-5 h-20">
 
-                        <Link href="/" className="shrink-0 mr-2" onClick={() => setSearchQuery('')}>
+                        <Link href="/" className="shrink-0" onClick={() => setSearchQuery('')}>
                             <HeaderLogo light />
                         </Link>
 
-                        <nav className="hidden lg:flex items-center gap-1">
+                        <nav className="hidden lg:flex items-center gap-1 shrink-0">
                             {PRIMARY_LINKS.map(l => (
                                 <Link key={l.href} href={l.href}
-                                    className={`text-sm px-3 py-1.5 rounded-lg transition-colors font-medium whitespace-nowrap ${l.highlight
-                                        ? 'border text-white'
-                                        : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
+                                    className={`text-sm px-3 py-1.5 rounded-lg transition-colors font-medium whitespace-nowrap ${l.highlight ? 'border text-white' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
                                     style={l.highlight
                                         ? { borderColor: 'var(--hd-gold-line)', background: 'var(--hd-gold-soft)' }
                                         : undefined}>
@@ -250,7 +263,7 @@ const Header: React.FC = () => {
                                 onChange={setSearchQuery}
                                 onSubmit={(term) => handleSearch(term)}
                                 placeholder="Search for the item"
-                                leading={renderCategorySelector(false)}
+                                leading={<>{renderCategorySelector(false)}<span className="shrink-0 w-px h-5 bg-gray-200" aria-hidden /></>}
                             />
                         </div>
 
@@ -312,12 +325,7 @@ const Header: React.FC = () => {
                             <Link href={wishlistHref} className={`${iconBtn} cursor-pointer hover:brightness-95 relative`}
                                 style={{ background: 'var(--hd-gold-soft)' }} aria-label="Wishlist">
                                 <FiHeart size={21} strokeWidth={1.8} style={{ color: 'var(--hd-gold-deep)' }} />
-                                {wishlistCount > 0 && (
-                                    <span className="absolute -top-1 -right-1 text-white text-[9px] min-w-[17px] h-[17px] px-0.5 rounded-full flex items-center justify-center font-bold ring-2 ring-white"
-                                        style={{ background: 'var(--hd-gold-deep)' }}>
-                                        {wishlistCount > 99 ? '99+' : wishlistCount}
-                                    </span>
-                                )}
+                                {countBadge(wishlistCount, 'var(--hd-gold-deep)')}
                             </Link>
                         </div>
                     </div>
@@ -405,13 +413,12 @@ const Header: React.FC = () => {
             {/* ═══════════ 3 · CATEGORY BAR ═══════════
                 EXPLORE ALL holds the full list; the rail beside it carries the
                 first eight so the common ones are one click away. lg and up only. */}
-            <div className="relative w-full hidden lg:flex">
-                <div className="flex flex-col flex-1 items-center max-w-[1344px] mx-auto px-2">
-                    <div className="flex items-center gap-3 py-2.5 w-full">
+            <div className="hidden lg:block">
+                <div className={`${SHELL} h-[68px] flex items-center gap-4`}>
 
                         <div className="relative shrink-0" ref={exploreRef}>
                             <button type="button" onClick={() => setIsExploreOpen(p => !p)}
-                                className="flex items-center gap-2 text-gray-900 font-bold text-[12.5px] tracking-wide px-[18px] py-[14px] rounded-[9px] transition-colors cursor-pointer"
+                                className="hd-pill flex items-center gap-2 h-[var(--hd-control)] px-5 rounded-xl text-gray-900 font-bold text-[12.5px] tracking-wide transition-colors cursor-pointer"
                                 style={{ background: 'var(--hd-gold)' }}
                                 onMouseEnter={e => (e.currentTarget.style.background = 'var(--hd-gold-hover)')}
                                 onMouseLeave={e => (e.currentTarget.style.background = 'var(--hd-gold)')}>
@@ -444,16 +451,20 @@ const Header: React.FC = () => {
 
                         <div className="w-px h-6 bg-white/15 shrink-0" />
 
-                        <nav className="flex items-center justify-between rounded-lg flex-1 bg-white py-1.5 px-5 relative z-[99] overflow-hidden">
+                        {/* An even gap rather than justify-between: spacing that is
+                            computed from the leftover width changes with every
+                            viewport and with every category name, which is what made
+                            the rhythm here look accidental. Overflow scrolls sideways,
+                            so a longer catalogue never squeezes the row. */}
+                        <nav className="hd-pill hd-rail flex items-center gap-1 flex-1 min-w-0 overflow-x-auto h-[var(--hd-control)] rounded-xl bg-white px-2 relative z-[99]">
                             {barCategories.map(cat => (
                                 <Link key={cat._id} href={`/products?category=${cat._id}`}
-                                    className="flex items-center gap-1 text-[13.5px] font-medium text-[#222] hover:text-black transition-colors whitespace-nowrap px-1">
-                                    <span className="truncate max-w-[110px]">{cat.name}</span>
+                                    className="flex items-center gap-1 shrink-0 px-3 py-1.5 rounded-lg text-[13.5px] font-medium text-[#222] hover:bg-black/[0.04] transition-colors whitespace-nowrap">
+                                    <span className="truncate max-w-[130px]">{cat.name}</span>
                                     <FiChevronDown size={13} strokeWidth={2.5} className="text-gray-400 shrink-0" />
                                 </Link>
                             ))}
                         </nav>
-                    </div>
                 </div>
             </div>
             </div>{/* /dz-header-bg */}
@@ -462,7 +473,7 @@ const Header: React.FC = () => {
                 The list is rendered twice and the track slides exactly -50%, so the
                 second copy is under the cursor the moment the first runs out and the
                 loop never shows a seam. Pauses on hover; see globals.css. */}
-            <div className="relative w-full overflow-hidden select-none py-3">
+            <div className="hd-ticker relative w-full h-11 flex items-center overflow-hidden select-none">
                 <div className="flex items-center marquee-track w-max">
                     {[...TICKER, ...TICKER].map((item, i) => (
                         <span key={i}

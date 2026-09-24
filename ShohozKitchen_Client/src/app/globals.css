@@ -933,3 +933,56 @@ h6 {
     rgba(26, 24, 21, 0) 100%
   );
 }
+
+/* ── Header: measurement system ───────────────────────────────────────
+   One control height for every interactive thing in the header, so the
+   search field, the action squares and EXPLORE ALL share a baseline
+   instead of each carrying its own hand-tuned number. */
+:root {
+  --hd-control: 48px;
+
+  /* Elevation, in three steps, used by everything in the header. */
+  --hd-shadow-sm: 0 1px 2px rgba(0, 0, 0, .16);
+  --hd-shadow-lg: 0 24px 48px -16px rgba(0, 0, 0, .3), 0 0 0 1px rgba(0, 0, 0, .05);
+  --hd-shadow-header: 0 1px 0 rgba(0, 0, 0, .05), 0 14px 34px -22px rgba(0, 0, 0, .6);
+}
+
+/* The header lifts off the page. Without this it simply stops and the
+   storefront underneath looks like it begins mid-air. */
+.dz-header {
+  box-shadow: var(--hd-shadow-header);
+}
+
+/* Pale pills on the charcoal: a shadow alone reads as nothing against a
+   dark ground, so the hairline ring is what actually separates them. */
+.hd-pill {
+  box-shadow: var(--hd-shadow-sm), inset 0 0 0 1px rgba(0, 0, 0, .05);
+}
+
+/* Keyboard users get a visible ring on every control. :focus-visible, so
+   it never fires on a mouse click. */
+.dz-header a:focus-visible,
+.dz-header button:focus-visible,
+.dz-header input:focus-visible {
+  outline: 2px solid var(--hd-gold);
+  outline-offset: 2px;
+  border-radius: 10px;
+}
+
+/* The category rail slides sideways rather than cramming when the
+   catalogue outgrows the row; a scrollbar on a 60px strip is noise. */
+.hd-rail {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.hd-rail::-webkit-scrollbar {
+  display: none;
+}
+
+/* Ticker: fade both ends so items arrive and leave instead of being
+   chopped off against the edge of the viewport. */
+.hd-ticker {
+  -webkit-mask-image: linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent);
+  mask-image: linear-gradient(to right, transparent, #000 64px, #000 calc(100% - 64px), transparent);
+}
