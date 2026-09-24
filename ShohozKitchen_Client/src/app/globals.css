@@ -873,11 +873,12 @@ h6 {
   margin: 8px 0;
 }
 /* ═══════════════════════════════════════════════════════════════════
-   Storefront header — design tokens, font and the announcement ticker.
+   Storefront header — design tokens, backdrop and the announcement ticker.
 
-   The header is the one surface that uses Urbanist instead of Poppins.
-   The global `* { font-family: Poppins !important }` rule above wins on
-   specificity, so this has to be scoped AND flagged to take effect.
+   The header takes the site font (Poppins) like everything else. If a
+   header-only face is ever wanted again, note that the global
+   `* { font-family: Poppins !important }` rule above outranks a plain
+   declaration — the override has to be scoped AND flagged.
    ═══════════════════════════════════════════════════════════════════ */
 
 :root {
@@ -891,10 +892,6 @@ h6 {
   --hd-dark: #1a1a1a;          /* mobile header slab */
 }
 
-.dz-header,
-.dz-header * {
-  font-family: "Urbanist", "Poppins", sans-serif !important;
-}
 
 /* ── Announcement ticker ──────────────────────────────────────────────
    The track holds the item list twice over, so translating it exactly

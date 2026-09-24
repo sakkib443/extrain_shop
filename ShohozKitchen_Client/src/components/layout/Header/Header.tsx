@@ -239,7 +239,11 @@ const Header: React.FC = () => {
                             ))}
                         </nav>
 
-                        <div className="flex-1 relative">
+                        {/* min-w-0: a flex item will not shrink past the intrinsic
+                            width of its content by default, so without this the
+                            search field holds the row open and pushes the action
+                            squares off the right edge between lg and xl. */}
+                        <div className="flex-1 relative min-w-0">
                             <SearchAutocomplete
                                 variant="desktop"
                                 value={searchQuery}
