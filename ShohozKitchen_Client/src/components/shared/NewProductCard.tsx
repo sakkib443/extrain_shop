@@ -208,9 +208,9 @@ const NewProductCard: React.FC<NewProductCardProps> = ({ product }) => {
                 </h3>
 
                 <div className='flex items-baseline gap-2'>
-                    <span className='pc-price'>৳ {currentPrice.toLocaleString()}</span>
+                    <span className='pc-price'>৳ {currentPrice.toLocaleString('en-US')}</span>
                     {oldPrice && oldPrice > currentPrice && (
-                        <span className='pc-price-old'>৳ {oldPrice.toLocaleString()}</span>
+                        <span className='pc-price-old'>৳ {oldPrice.toLocaleString('en-US')}</span>
                     )}
                 </div>
 

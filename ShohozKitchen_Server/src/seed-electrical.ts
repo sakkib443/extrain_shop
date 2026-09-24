@@ -19,6 +19,9 @@ import { Product } from './app/modules/product/product.model';
 /** Artwork drawn by scripts/make-product-art.mjs and served from the client. */
 const art = (slug: string) => "/products/" + slug + ".svg";
 
+/** Supplied photography, dropped into the client's public/products/img/. */
+const photo = (file: string) => "/products/img/" + file;
+
 interface SeedCategory {
     name: string;
     slug: string;
@@ -31,6 +34,10 @@ const CATEGORIES: SeedCategory[] = [
     { name: 'Fans & Cooling', slug: 'fans-cooling', icon: '🌀', image: art("bldc-ceiling-fan-56-remote") },
     { name: 'Wiring & Switches', slug: 'wiring-switches', icon: '🔌', image: art("modular-switch-socket-board-6-gang") },
     { name: 'Power & Backup', slug: 'power-backup', icon: '🔋', image: art("pure-sine-wave-ips-1200va") },
+    { name: 'Phones', slug: 'phones', icon: '📱', image: photo('iphone-18-pro-max-glacier-42997c16-d21b-4695-80e0-ba0512072af7.webp') },
+    { name: 'Laptops', slug: 'laptops', icon: '💻', image: photo('untitled-design-15-51286e58-7289-4db6-bf4d-65e985b6eac8.avif') },
+    { name: 'Audio', slug: 'audio', icon: '🎧', image: photo('main-image-12001263-2026-09-05t204540551-33b5a647-7aff-4a33-a03b-ea308b46959c.webp') },
+    { name: 'Wearables', slug: 'wearables', icon: '⌚', image: photo('main-image-12001263-2026-09-05t200956282-ca3010fd-0610-4895-a3e3-2e6596be3dea.webp') },
 ];
 
 interface SeedProduct {
@@ -47,6 +54,8 @@ interface SeedProduct {
     specifications: { key: string; value: string }[];
     warrantyMonths: number;
     isFeatured?: boolean;
+    /** Overrides the drawn artwork when a real photograph exists. */
+    image?: string;
     /** Demo sales history, so Top Selling badges and best-seller rows mean something. */
     sold: number;
     rating: number;
@@ -248,6 +257,112 @@ const PRODUCTS: SeedProduct[] = [
         ],
         warrantyMonths: 24,
     },
+
+    /* ── Gadgets, on supplied photography ──────────────────────────────── */
+
+    {
+        name: 'iPhone 18 Pro Max 256GB — Glacier',
+        slug: 'iphone-18-pro-max-256gb-glacier',
+        sold: 318, rating: 4.9, reviews: 126,
+        category: 'phones',
+        brand: 'Apple', model: 'A3298',
+        price: 189900, originalPrice: 214900, stock: 14,
+        shortDescription: 'Titanium body, 6.9" ProMotion display and the four-camera Pro system.',
+        description:
+            '<p>The Pro Max is the one to buy if the camera matters. The four-lens system covers ultra-wide through 5× telephoto without swapping to digital crop, and ProRes recording writes straight to an external drive over USB-C.</p>'
+            + '<ul><li>6.9" Super Retina XDR, 120Hz ProMotion</li><li>Titanium frame, Ceramic Shield 2 front</li><li>Up to 33 hours of video playback</li></ul>',
+        image: photo('iphone-18-pro-max-glacier-42997c16-d21b-4695-80e0-ba0512072af7.webp'),
+        specifications: [
+            { key: 'Display', value: '6.9" OLED, 120Hz' },
+            { key: 'Storage', value: '256 GB' },
+            { key: 'Rear camera', value: '48MP + 48MP ultra-wide + 12MP 5× tele' },
+            { key: 'Charging', value: 'USB-C, 40W wired' },
+        ],
+        warrantyMonths: 12,
+        isFeatured: true,
+    },
+    {
+        name: 'HP Victus Gaming Laptop — RTX 4060',
+        slug: 'hp-victus-gaming-laptop-rtx-4060',
+        sold: 74, rating: 4.6, reviews: 38,
+        category: 'laptops',
+        brand: 'HP', model: 'Victus 16',
+        price: 134500, originalPrice: 152000, stock: 9,
+        shortDescription: 'RTX 4060 and a 144Hz panel — plays current titles at native resolution.',
+        description:
+            '<p>An RTX 4060 with 8 GB of VRAM is the point where current titles run at the panel\'s own resolution without dropping to upscaling. The 144Hz screen is what makes that framerate visible.</p>'
+            + '<ul><li>16.1" FHD 144Hz IPS</li><li>16 GB DDR5, 512 GB NVMe SSD</li><li>Dual-fan cooling with a rear exhaust</li></ul>',
+        image: photo('untitled-design-15-51286e58-7289-4db6-bf4d-65e985b6eac8.avif'),
+        specifications: [
+            { key: 'Graphics', value: 'NVIDIA RTX 4060 8GB' },
+            { key: 'Memory', value: '16 GB DDR5' },
+            { key: 'Storage', value: '512 GB NVMe SSD' },
+            { key: 'Display', value: '16.1" FHD 144Hz' },
+        ],
+        warrantyMonths: 12,
+        isFeatured: true,
+    },
+    {
+        name: 'Lenovo IdeaPad Slim 5 — Ryzen 7',
+        slug: 'lenovo-ideapad-slim-5-ryzen-7',
+        sold: 112, rating: 4.5, reviews: 47,
+        category: 'laptops',
+        brand: 'Lenovo', model: 'IdeaPad Slim 5',
+        price: 98900, originalPrice: 112000, stock: 16,
+        shortDescription: 'A quiet eight-core ultrabook that lasts a working day unplugged.',
+        description:
+            '<p>Eight Zen 4 cores in a 1.5 kg chassis, and it stays quiet doing office work because the fan only spins up under sustained load. Comfortably a full day away from a charger.</p>'
+            + '<ul><li>14" 2.2K IPS, 300 nits</li><li>16 GB LPDDR5, 512 GB SSD</li><li>Backlit keyboard, fingerprint reader</li></ul>',
+        image: photo('untitled-design-17-f9fa3ffb-618f-49ea-938f-0380bbc055db.avif'),
+        specifications: [
+            { key: 'Processor', value: 'AMD Ryzen 7, 8 cores' },
+            { key: 'Memory', value: '16 GB LPDDR5' },
+            { key: 'Storage', value: '512 GB NVMe SSD' },
+            { key: 'Weight', value: '1.5 kg' },
+        ],
+        warrantyMonths: 24,
+    },
+    {
+        name: 'AirPods 4 with Active Noise Cancellation',
+        slug: 'airpods-4-active-noise-cancellation',
+        sold: 264, rating: 4.7, reviews: 89,
+        category: 'audio',
+        brand: 'Apple', model: 'AirPods 4 ANC',
+        price: 21900, originalPrice: 25500, stock: 42,
+        shortDescription: 'Open-fit buds that still cancel noise, with a USB-C charging case.',
+        description:
+            '<p>Noise cancellation in an open-fit bud, which is the trick here — no silicone tip pressing into the ear canal, and still a usable amount of cabin and traffic noise removed.</p>'
+            + '<ul><li>Adaptive Audio and Transparency</li><li>Up to 30 hours total with the case</li><li>USB-C and wireless charging</li></ul>',
+        image: photo('main-image-12001263-2026-09-05t204540551-33b5a647-7aff-4a33-a03b-ea308b46959c.webp'),
+        specifications: [
+            { key: 'Fit', value: 'Open, tip-free' },
+            { key: 'Battery', value: '5 h buds, 30 h with case' },
+            { key: 'Charging', value: 'USB-C + Qi wireless' },
+            { key: 'Water resistance', value: 'IP54' },
+        ],
+        warrantyMonths: 12,
+        isFeatured: true,
+    },
+    {
+        name: 'Apple Watch SE 44mm — Starlight',
+        slug: 'apple-watch-se-44mm-starlight',
+        sold: 187, rating: 4.6, reviews: 64,
+        category: 'wearables',
+        brand: 'Apple', model: 'Watch SE 44mm',
+        price: 32900, originalPrice: 37500, stock: 23,
+        shortDescription: 'Crash and fall detection, sleep tracking, and two days between charges.',
+        description:
+            '<p>The SE keeps the parts that matter day to day — heart rate, sleep stages, crash and fall detection — and drops the always-on display, which is most of why it costs what it does.</p>'
+            + '<ul><li>44 mm Retina display</li><li>Water resistant to 50 m</li><li>Up to 18 hours, ~2 days with low power mode</li></ul>',
+        image: photo('main-image-12001263-2026-09-05t200956282-ca3010fd-0610-4895-a3e3-2e6596be3dea.webp'),
+        specifications: [
+            { key: 'Case size', value: '44 mm' },
+            { key: 'Sensors', value: 'Heart rate, accelerometer, gyroscope' },
+            { key: 'Water resistance', value: '50 m' },
+            { key: 'Battery', value: 'Up to 18 h' },
+        ],
+        warrantyMonths: 12,
+    },
 ];
 
 async function main() {
@@ -299,8 +414,8 @@ async function main() {
                     discount,
                     costPrice: Math.round(p.price * 0.62),
                     stock: p.stock,
-                    thumbnail: art(p.slug),
-                    images: [art(p.slug)],
+                    thumbnail: p.image ?? art(p.slug),
+                    images: [p.image ?? art(p.slug)],
                     category: idBySlug.get(p.category) ?? null,
                     brand: p.brand,
                     model: p.model,
