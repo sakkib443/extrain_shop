@@ -2,10 +2,23 @@
 
 import React, { useState, useEffect, useMemo, useCallback } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import { useGetSiteContentQuery } from '@/redux/api/siteContentApi';
 
-const DEFAULT_HERO_IMAGE = '/images/hero-01.webp';
+/* The two banners the shop ships with. An admin can replace the left rail from
+   Site Content → Hero Slides; the right panel falls back to this until one is
+   set. Both are served through next/image, which is what keeps a 1.6 MB PNG
+   from reaching the visitor as a 1.6 MB PNG. */
+const DEFAULT_HERO_MAIN = '/banners/hero-main.png';
+const DEFAULT_HERO_SIDE = '/banners/hero-side.png';
+
+/* Natural sizes: 1672×941 and 1254×1254. Splitting the row's width in the same
+   1.777 : 1 ratio as their aspect ratios makes the two panels come out exactly
+   the same height — including once the gap is subtracted, since both shrink by
+   the same proportion. */
+const MAIN_ASPECT = '1672 / 941';
+const SIDE_ASPECT = '1 / 1';
 
 interface HeroSlide {
     _id?: string;
@@ -20,7 +33,6 @@ const HeroSection: React.FC = () => {
     const [currentIndex, setCurrentIndex] = useState(0);
     const [isHovered, setIsHovered] = useState(false);
 
-    // Extract and sort active hero slides from site-content
     const slides: HeroSlide[] = useMemo(() => {
         const rawSlides: HeroSlide[] = siteRes?.data?.heroSlides;
         if (Array.isArray(rawSlides) && rawSlides.length > 0) {
@@ -29,11 +41,18 @@ const HeroSection: React.FC = () => {
                 .sort((a, b) => (a.order ?? 0) - (b.order ?? 0));
             if (activeOnly.length > 0) return activeOnly;
         }
-        return [{ imageUrl: DEFAULT_HERO_IMAGE, link: '/products' }];
+        return [{ imageUrl: DEFAULT_HERO_MAIN, link: '/products' }];
+    }, [siteRes]);
+
+    /* The side panel takes the second configured slide when there is one, so an
+       admin can drive both halves from the same list. */
+    const sidePanel = useMemo(() => {
+        const raw: HeroSlide[] = siteRes?.data?.heroSide;
+        const first = Array.isArray(raw) ? raw.find((s) => s && s.active !== false && s.imageUrl) : null;
+        return first || { imageUrl: DEFAULT_HERO_SIDE, link: '/products?category=phones' };
     }, [siteRes]);
 
     const total = slides.length;
-    // Derive valid index safely without needing a setState effect
     const safeIndex = currentIndex < total ? currentIndex : 0;
 
     const nextSlide = useCallback(() => {
@@ -44,7 +63,6 @@ const HeroSection: React.FC = () => {
         setCurrentIndex((prev) => ((prev < total ? prev : 0) - 1 + total) % total);
     }, [total]);
 
-    // Auto-advance every 5 seconds if there are multiple slides and user is not hovering
     useEffect(() => {
         if (total <= 1 || isHovered) return;
         const interval = setInterval(nextSlide, 5000);
@@ -55,86 +73,84 @@ const HeroSection: React.FC = () => {
 
     return (
         <section className="w-full">
-            {/* Same .container as every other section, so the banner's edges line
-                up with the cards below it. Its width rule lives in globals.css. */}
+            {/* Same .container as every other section, so the banners' edges line
+                up with the cards below them. Its width rule lives in globals.css. */}
             <div className="container mx-auto py-4 sm:py-5">
-                <div
-                    className="relative w-full aspect-[3/1] lg:aspect-[2293/590] rounded-md overflow-hidden bg-slate-100 group shadow-sm"
-                    onMouseEnter={() => setIsHovered(true)}
-                    onMouseLeave={() => setIsHovered(false)}
-                >
-                    {/* Slide Image Link */}
-                    <Link
-                        href={currentSlide.link || '/products'}
-                        className="block relative w-full h-full"
-                        aria-label="Hero Banner"
+                <div className="grid grid-cols-1 gap-3 sm:gap-4 lg:grid-cols-[1.777fr_1fr]">
+
+                    {/* ── Left: the wide rail ───────────────────────────────── */}
+                    <div
+                        className="hero-panel group relative"
+                        style={{ aspectRatio: MAIN_ASPECT }}
+                        onMouseEnter={() => setIsHovered(true)}
+                        onMouseLeave={() => setIsHovered(false)}
                     >
-                        {/* Phones and tablets show the same banner as the desktop. The frame
-                            follows the banner's own 3:1 shape there, so the whole banner
-                            (heading, model, badges) fits without being cropped. */}
-                        {/* eslint-disable-next-line @next/next/no-img-element */}
-                        <img
-                            key={currentSlide.imageUrl}
-                            src={currentSlide.imageUrl}
-                            alt="Trendy Shops Hero Banner"
-                            className="w-full h-full object-cover object-center transition-opacity duration-500 ease-in-out"
-                            onError={(e) => {
-                                (e.currentTarget as HTMLImageElement).src = DEFAULT_HERO_IMAGE;
-                            }}
+                        <Link
+                            href={currentSlide.link || '/products'}
+                            className="block h-full w-full"
+                            aria-label="Featured offer"
+                        >
+                            <Image
+                                key={currentSlide.imageUrl}
+                                src={currentSlide.imageUrl}
+                                alt="Featured offer"
+                                fill
+                                priority
+                                sizes="(max-width: 1024px) 100vw, 64vw"
+                                className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
+                            />
+                        </Link>
+
+                        {total > 1 && (
+                            <>
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); prevSlide(); }}
+                                    aria-label="Previous slide"
+                                    className="hero-arrow left-3"
+                                >
+                                    <FiChevronLeft className="h-5 w-5" />
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={(e) => { e.preventDefault(); e.stopPropagation(); nextSlide(); }}
+                                    aria-label="Next slide"
+                                    className="hero-arrow right-3"
+                                >
+                                    <FiChevronRight className="h-5 w-5" />
+                                </button>
+
+                                <div className="absolute bottom-3 left-1/2 z-10 flex -translate-x-1/2 items-center gap-1.5 rounded-full bg-black/25 px-2.5 py-1 backdrop-blur-xs">
+                                    {slides.map((_, idx) => (
+                                        <button
+                                            key={idx}
+                                            type="button"
+                                            onClick={(e) => { e.preventDefault(); e.stopPropagation(); setCurrentIndex(idx); }}
+                                            aria-label={`Go to slide ${idx + 1}`}
+                                            className={`cursor-pointer rounded-full transition-all duration-300 ${idx === safeIndex ? 'h-2 w-6 bg-white' : 'h-2 w-2 bg-white/50 hover:bg-white/80'}`}
+                                        />
+                                    ))}
+                                </div>
+                            </>
+                        )}
+                    </div>
+
+                    {/* ── Right: the square panel ───────────────────────────── */}
+                    <Link
+                        href={sidePanel.link || '/products'}
+                        className="hero-panel group relative block"
+                        style={{ aspectRatio: SIDE_ASPECT }}
+                        aria-label="Featured range"
+                    >
+                        <Image
+                            src={sidePanel.imageUrl}
+                            alt="Featured range"
+                            fill
+                            priority
+                            sizes="(max-width: 1024px) 100vw, 36vw"
+                            className="object-cover object-center transition-transform duration-700 group-hover:scale-[1.02]"
                         />
                     </Link>
-
-                    {/* Navigation Arrows (shown if multiple slides) */}
-                    {total > 1 && (
-                        <>
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    prevSlide();
-                                }}
-                                aria-label="Previous Slide"
-                                className="absolute left-2 sm:left-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-gray-800 shadow-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 hover:scale-105 backdrop-blur-xs cursor-pointer z-10"
-                            >
-                                <FiChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
-                            </button>
-
-                            <button
-                                type="button"
-                                onClick={(e) => {
-                                    e.preventDefault();
-                                    e.stopPropagation();
-                                    nextSlide();
-                                }}
-                                aria-label="Next Slide"
-                                className="absolute right-2 sm:right-4 top-1/2 -translate-y-1/2 w-9 h-9 sm:w-11 sm:h-11 rounded-full bg-white/80 hover:bg-white text-gray-800 shadow-md flex items-center justify-center transition-all opacity-0 group-hover:opacity-100 hover:scale-105 backdrop-blur-xs cursor-pointer z-10"
-                            >
-                                <FiChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
-                            </button>
-
-                            {/* Dots Indicator */}
-                            <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex items-center gap-1.5 sm:gap-2 z-10 bg-black/25 backdrop-blur-xs px-2.5 py-1 rounded-full">
-                                {slides.map((_, idx) => (
-                                    <button
-                                        key={idx}
-                                        type="button"
-                                        onClick={(e) => {
-                                            e.preventDefault();
-                                            e.stopPropagation();
-                                            setCurrentIndex(idx);
-                                        }}
-                                        aria-label={`Go to slide ${idx + 1}`}
-                                        className={`transition-all duration-300 rounded-full cursor-pointer ${
-                                            idx === safeIndex
-                                                ? 'w-5 sm:w-6 h-2 bg-white'
-                                                : 'w-2 h-2 bg-white/50 hover:bg-white/80'
-                                        }`}
-                                    />
-                                ))}
-                            </div>
-                        </>
-                    )}
                 </div>
             </div>
         </section>
