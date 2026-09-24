@@ -935,22 +935,27 @@ h6 {
 }
 
 /* ── Header: measurement system ───────────────────────────────────────
-   One control height for every interactive thing in the header, so the
-   search field, the action squares and EXPLORE ALL share a baseline
-   instead of each carrying its own hand-tuned number. */
+   One control height and one corner radius for every interactive thing in
+   the header, so the search field, the action squares, EXPLORE ALL and the
+   category rail share a baseline instead of each carrying its own number. */
 :root {
   --hd-control: 48px;
 
-  /* Elevation, in three steps, used by everything in the header. */
+  /* Corners. Tailwind's rounded-xl resolves to 16px in this project, not the
+     12px of a stock install, which is why the controls were reading as too
+     round. These are explicit so the scale cannot drift again. */
+  --hd-radius: 8px;        /* controls: buttons, search field, rail */
+  --hd-radius-lg: 10px;    /* larger surfaces: dropdown panels */
+
   --hd-shadow-sm: 0 1px 2px rgba(0, 0, 0, .16);
-  --hd-shadow-lg: 0 24px 48px -16px rgba(0, 0, 0, .3), 0 0 0 1px rgba(0, 0, 0, .05);
-  --hd-shadow-header: 0 1px 0 rgba(0, 0, 0, .05), 0 14px 34px -22px rgba(0, 0, 0, .6);
+  --hd-shadow-lg: 0 18px 38px -14px rgba(0, 0, 0, .28), 0 0 0 1px rgba(0, 0, 0, .05);
 }
 
-/* The header lifts off the page. Without this it simply stops and the
-   storefront underneath looks like it begins mid-air. */
+/* No drop shadow under the header. A charcoal block against a white page is
+   already as separated as it can get, and a blurred shadow here spilled 34px
+   down over the banner below it. A hairline is all the edge it needs. */
 .dz-header {
-  box-shadow: var(--hd-shadow-header);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, .06);
 }
 
 /* Pale pills on the charcoal: a shadow alone reads as nothing against a
@@ -966,7 +971,7 @@ h6 {
 .dz-header input:focus-visible {
   outline: 2px solid var(--hd-gold);
   outline-offset: 2px;
-  border-radius: 10px;
+  border-radius: var(--hd-radius);
 }
 
 /* The category rail slides sideways rather than cramming when the

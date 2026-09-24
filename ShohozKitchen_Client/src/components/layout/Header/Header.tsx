@@ -132,7 +132,7 @@ const Header: React.FC = () => {
 
     /** The square the action icons sit in. Height comes from --hd-control, the
         same token the search field and EXPLORE ALL use, so all three line up. */
-    const iconBtn = "hd-pill w-[var(--hd-control)] h-[var(--hd-control)] rounded-xl flex items-center justify-center transition-all duration-200 shrink-0";
+    const iconBtn = "hd-pill w-[var(--hd-control)] h-[var(--hd-control)] rounded-[var(--hd-radius)] flex items-center justify-center transition-all duration-200 shrink-0";
 
     /** Counts come back from localStorage on the client, so the server renders
         zero and the first client render would not. Holding them until after
@@ -151,7 +151,7 @@ const Header: React.FC = () => {
             <button
                 type="button"
                 onClick={(e) => { e.stopPropagation(); setIsSearchCatOpen((prev) => !prev); }}
-                className={`flex items-center gap-1.5 ${isMobile ? 'pl-2.5 pr-2 h-8 text-xs' : 'pl-3.5 pr-2.5 h-9 text-[13px]' } font-semibold whitespace-nowrap transition-colors rounded-lg cursor-pointer select-none text-[var(--color-text-primary)] hover:bg-black/[0.04]`}
+                className={`flex items-center gap-1.5 ${isMobile ? 'pl-2.5 pr-2 h-8 text-xs' : 'pl-3.5 pr-2.5 h-9 text-[13px]' } font-semibold whitespace-nowrap transition-colors rounded-[6px] cursor-pointer select-none text-[var(--color-text-primary)] hover:bg-black/[0.04]`}
                 title="Select category to filter"
             >
                 <FiGlobe size={13} strokeWidth={2} style={{ color: 'var(--hd-gold-deep)' }} className="shrink-0" />
@@ -163,14 +163,14 @@ const Header: React.FC = () => {
             </button>
 
             {isSearchCatOpen && (
-                <div className={`absolute top-full left-0 mt-2 ${isMobile ? 'w-60 max-w-[85vw]' : 'w-64'} bg-white rounded-2xl border border-gray-100 z-[100] max-h-80 overflow-y-auto p-1.5 animate-fadeIn`}
+                <div className={`absolute top-full left-0 mt-2 ${isMobile ? 'w-60 max-w-[85vw]' : 'w-64'} bg-white rounded-[var(--hd-radius-lg)] border border-gray-100 z-[100] max-h-80 overflow-y-auto p-1.5 animate-fadeIn`}
                     style={{ boxShadow: '0 20px 40px -10px rgba(0,0,0,0.2), 0 0 0 1px rgba(0,0,0,0.06)' }}>
                     <div className="px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-gray-400 border-b border-gray-100 mb-1">
                         Filter by Category
                     </div>
                     <button type="button"
                         onClick={() => { setSelectedSearchCat(null); setIsSearchCatOpen(false); }}
-                        className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs font-semibold transition-all cursor-pointer ${!selectedSearchCat ? 'bg-[var(--hd-gold-soft)] font-bold' : 'text-gray-700 hover:bg-gray-50'}`}>
+                        className={`w-full flex items-center justify-between px-3 py-2 rounded-[var(--hd-radius)] text-xs font-semibold transition-all cursor-pointer ${!selectedSearchCat ? 'bg-[var(--hd-gold-soft)] font-bold' : 'text-gray-700 hover:bg-gray-50'}`}>
                         <span className="flex items-center gap-2"><span>🛒</span> All Categories</span>
                         {!selectedSearchCat && <span className="text-xs font-bold" style={{ color: 'var(--hd-gold-deep)' }}>✓</span>}
                     </button>
@@ -179,7 +179,7 @@ const Header: React.FC = () => {
                         return (
                             <button key={cat._id} type="button"
                                 onClick={() => { setSelectedSearchCat(cat); setIsSearchCatOpen(false); }}
-                                className={`w-full flex items-center justify-between px-3 py-2 rounded-xl text-xs transition-all cursor-pointer ${isSelected ? 'bg-[var(--hd-gold-soft)] font-bold' : 'text-gray-700 hover:bg-gray-50'}`}>
+                                className={`w-full flex items-center justify-between px-3 py-2 rounded-[var(--hd-radius)] text-xs transition-all cursor-pointer ${isSelected ? 'bg-[var(--hd-gold-soft)] font-bold' : 'text-gray-700 hover:bg-gray-50'}`}>
                                 <span className="flex items-center gap-2 truncate pr-2"><span className="truncate">{cat.name}</span></span>
                                 {isSelected && <span className="text-xs font-bold shrink-0" style={{ color: 'var(--hd-gold-deep)' }}>✓</span>}
                             </button>
@@ -196,13 +196,13 @@ const Header: React.FC = () => {
         <header className="dz-header w-full sticky top-0 z-[60] lg:static bg-white lg:px-4 transition-colors duration-300">
 
             {/* Rows 1–3 share the charcoal backdrop; the ticker below sits on white. */}
-            <div className="dz-header-bg rounded-b-[20px] lg:rounded-none">
+            <div className="dz-header-bg rounded-b-[12px] lg:rounded-none">
 
             {/* ═══════════ 1 · UTILITY BAR ═══════════
                 Hairline strip of secondary links. Hidden below md, exactly as the
                 reference does — on a phone this row is pure noise. */}
             <div className="hidden md:block">
-                <div className={`${SHELL} h-9 rounded-b-[10px] flex items-center justify-between bg-white`}>
+                <div className={`${SHELL} h-9 rounded-b-[8px] flex items-center justify-between bg-white`}>
 
                     <nav className="flex items-center gap-6">
                         {[{ href: '/expert', label: 'Expert Advice' }, { href: '/cost-calculator', label: 'Cost Calculator' }].map(l => (
@@ -234,7 +234,7 @@ const Header: React.FC = () => {
             <div className="border-b border-white/5">
                 <div className={SHELL}>
 
-                    <div className="hidden md:flex items-center gap-5 h-20">
+                    <div className="hidden md:flex items-center gap-5 py-3">
 
                         <Link href="/" className="shrink-0" onClick={() => setSearchQuery('')}>
                             <HeaderLogo light />
@@ -243,7 +243,7 @@ const Header: React.FC = () => {
                         <nav className="hidden lg:flex items-center gap-1 shrink-0">
                             {PRIMARY_LINKS.map(l => (
                                 <Link key={l.href} href={l.href}
-                                    className={`text-sm px-3 py-1.5 rounded-lg transition-colors font-medium whitespace-nowrap ${l.highlight ? 'border text-white' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
+                                    className={`text-sm px-3 py-1.5 rounded-[6px] transition-colors font-medium whitespace-nowrap ${l.highlight ? 'border text-white' : 'text-gray-300 hover:text-white hover:bg-white/5'}`}
                                     style={l.highlight
                                         ? { borderColor: 'var(--hd-gold-line)', background: 'var(--hd-gold-soft)' }
                                         : undefined}>
@@ -281,7 +281,7 @@ const Header: React.FC = () => {
                                     </button>
 
                                     {isProfileOpen && (
-                                        <div className="absolute right-0 top-full mt-2 w-60 bg-white rounded-2xl border border-gray-100 overflow-hidden z-[100] animate-fadeIn"
+                                        <div className="absolute right-0 top-full mt-2 w-60 bg-white rounded-[var(--hd-radius-lg)] border border-gray-100 overflow-hidden z-[100] animate-fadeIn"
                                             style={{ boxShadow: '0 20px 40px -10px rgba(0,0,0,0.18)' }}>
                                             <div className="px-4 py-3.5 border-b border-gray-100" style={{ background: 'var(--hd-gold-soft)' }}>
                                                 <p className="text-sm font-bold text-gray-800 truncate">{user.name || 'User'}</p>
@@ -341,14 +341,14 @@ const Header: React.FC = () => {
                                 <HeaderLogo light height={30} maxWidth={150} />
                             </Link>
                             <div className="flex items-center gap-2">
-                                <Link href={wishlistHref} className="w-11 h-11 rounded-xl flex items-center justify-center shrink-0"
+                                <Link href={wishlistHref} className="w-11 h-11 rounded-[var(--hd-radius)] flex items-center justify-center shrink-0"
                                     style={{ background: 'var(--hd-gold)' }} aria-label="Wishlist">
                                     <FiHeart size={18} className="text-gray-900" />
                                 </Link>
-                                <Link href="/track" className="w-11 h-11 rounded-xl flex items-center justify-center bg-white shrink-0" aria-label="Track order">
+                                <Link href="/track" className="w-11 h-11 rounded-[var(--hd-radius)] flex items-center justify-center bg-white shrink-0" aria-label="Track order">
                                     <FiMapPin size={18} className="text-[#222]" />
                                 </Link>
-                                <Link href="/cart" className="w-11 h-11 rounded-xl flex items-center justify-center bg-white relative shrink-0" aria-label="Cart">
+                                <Link href="/cart" className="w-11 h-11 rounded-[var(--hd-radius)] flex items-center justify-center bg-white relative shrink-0" aria-label="Cart">
                                     <FiShoppingCart size={18} className="text-[#222]" />
                                     {cartBadge}
                                 </Link>
@@ -366,26 +366,26 @@ const Header: React.FC = () => {
                                 />
                             </div>
                             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                                className="w-11 h-11 rounded-xl bg-white flex items-center justify-center shrink-0"
+                                className="w-11 h-11 rounded-[var(--hd-radius)] bg-white flex items-center justify-center shrink-0"
                                 aria-label="Menu">
                                 {isMobileMenuOpen ? <FiX size={20} className="text-[#222]" /> : <FiMenu size={20} className="text-[#222]" />}
                             </button>
                         </div>
 
                         {isMobileMenuOpen && (
-                            <div className="bg-white rounded-2xl p-2 mt-3 max-h-[60vh] overflow-y-auto">
+                            <div className="bg-white rounded-[var(--hd-radius-lg)] p-2 mt-3 max-h-[60vh] overflow-y-auto">
                                 <button onClick={() => setIsMobileCategoryOpen(!isMobileCategoryOpen)}
-                                    className="w-full flex items-center justify-between px-3 py-2.5 text-gray-800 font-semibold text-sm rounded-lg hover:bg-gray-50">
+                                    className="w-full flex items-center justify-between px-3 py-2.5 text-gray-800 font-semibold text-sm rounded-[6px] hover:bg-gray-50">
                                     <span>Categories</span>
                                     <FiChevronDown size={14} className={`transition-transform ${isMobileCategoryOpen ? 'rotate-180' : ''}`} />
                                 </button>
                                 {isMobileCategoryOpen && (
                                     <div className="pl-3 space-y-0.5">
                                         <Link href="/products" onClick={() => setIsMobileMenuOpen(false)}
-                                            className="block px-3 py-2 text-gray-600 text-sm rounded-lg hover:bg-gray-50">🛒 All Products</Link>
+                                            className="block px-3 py-2 text-gray-600 text-sm rounded-[6px] hover:bg-gray-50">🛒 All Products</Link>
                                         {categories.map(cat => (
                                             <Link key={cat._id} href={`/products?category=${cat._id}`} onClick={() => setIsMobileMenuOpen(false)}
-                                                className="flex items-center gap-2 px-3 py-2 text-gray-600 text-sm rounded-lg hover:bg-gray-50">
+                                                className="flex items-center gap-2 px-3 py-2 text-gray-600 text-sm rounded-[6px] hover:bg-gray-50">
                                                 {isCatImg(cat)
                                                     ? <img src={getCatImg(cat)} alt="" className="w-4 h-4 object-contain rounded-xs shrink-0" />
                                                     : cat.icon && <span className="text-sm shrink-0">{cat.icon}</span>}
@@ -400,7 +400,7 @@ const Header: React.FC = () => {
                                 { href: wishlistHref, label: 'Wishlist' },
                                 ].map(item => (
                                     <Link key={item.label} href={item.href} onClick={() => setIsMobileMenuOpen(false)}
-                                        className="block px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-lg transition-colors">
+                                        className="block px-3 py-2.5 text-sm font-medium text-gray-600 hover:bg-gray-50 rounded-[6px] transition-colors">
                                         {item.label}
                                     </Link>
                                 ))}
@@ -414,11 +414,11 @@ const Header: React.FC = () => {
                 EXPLORE ALL holds the full list; the rail beside it carries the
                 first eight so the common ones are one click away. lg and up only. */}
             <div className="hidden lg:block">
-                <div className={`${SHELL} h-[68px] flex items-center gap-4`}>
+                <div className={`${SHELL} py-3.5 flex items-center gap-4`}>
 
                         <div className="relative shrink-0" ref={exploreRef}>
                             <button type="button" onClick={() => setIsExploreOpen(p => !p)}
-                                className="hd-pill flex items-center gap-2 h-[var(--hd-control)] px-5 rounded-xl text-gray-900 font-bold text-[12.5px] tracking-wide transition-colors cursor-pointer"
+                                className="hd-pill flex items-center gap-2 h-[var(--hd-control)] px-5 rounded-[var(--hd-radius)] text-gray-900 font-bold text-[12.5px] tracking-wide transition-colors cursor-pointer"
                                 style={{ background: 'var(--hd-gold)' }}
                                 onMouseEnter={e => (e.currentTarget.style.background = 'var(--hd-gold-hover)')}
                                 onMouseLeave={e => (e.currentTarget.style.background = 'var(--hd-gold)')}>
@@ -428,17 +428,17 @@ const Header: React.FC = () => {
                             </button>
 
                             {isExploreOpen && (
-                                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-2xl border border-gray-100 z-[100] max-h-[70vh] overflow-y-auto p-1.5 animate-fadeIn"
+                                <div className="absolute top-full left-0 mt-2 w-72 bg-white rounded-[var(--hd-radius-lg)] border border-gray-100 z-[100] max-h-[70vh] overflow-y-auto p-1.5 animate-fadeIn"
                                     style={{ boxShadow: '0 20px 40px -10px rgba(0,0,0,0.18)' }}>
                                     <Link href="/products" onClick={() => setIsExploreOpen(false)}
-                                        className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] font-bold transition-colors hover:bg-gray-50"
+                                        className="flex items-center gap-2.5 px-3 py-2 rounded-[var(--hd-radius)] text-[13px] font-bold transition-colors hover:bg-gray-50"
                                         style={{ color: 'var(--hd-gold-deep)' }}>
                                         <FiGrid size={15} /> All Products
                                     </Link>
                                     <div className="my-1 border-t border-gray-100" />
                                     {categories.map(cat => (
                                         <Link key={cat._id} href={`/products?category=${cat._id}`} onClick={() => setIsExploreOpen(false)}
-                                            className="flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] text-gray-700 hover:bg-gray-50 transition-colors">
+                                            className="flex items-center gap-2.5 px-3 py-2 rounded-[var(--hd-radius)] text-[13px] text-gray-700 hover:bg-gray-50 transition-colors">
                                             {isCatImg(cat)
                                                 ? <img src={getCatImg(cat)} alt="" className="w-5 h-5 object-contain rounded shrink-0" />
                                                 : cat.icon && <span className="text-base shrink-0">{cat.icon}</span>}
@@ -456,10 +456,10 @@ const Header: React.FC = () => {
                             viewport and with every category name, which is what made
                             the rhythm here look accidental. Overflow scrolls sideways,
                             so a longer catalogue never squeezes the row. */}
-                        <nav className="hd-pill hd-rail flex items-center gap-1 flex-1 min-w-0 overflow-x-auto h-[var(--hd-control)] rounded-xl bg-white px-2 relative z-[99]">
+                        <nav className="hd-pill hd-rail flex items-center gap-1 flex-1 min-w-0 overflow-x-auto h-[var(--hd-control)] rounded-[var(--hd-radius)] bg-white px-2 relative z-[99]">
                             {barCategories.map(cat => (
                                 <Link key={cat._id} href={`/products?category=${cat._id}`}
-                                    className="flex items-center gap-1 shrink-0 px-3 py-1.5 rounded-lg text-[13.5px] font-medium text-[#222] hover:bg-black/[0.04] transition-colors whitespace-nowrap">
+                                    className="flex items-center gap-1 shrink-0 px-3 py-1.5 rounded-[6px] text-[13.5px] font-medium text-[#222] hover:bg-black/[0.04] transition-colors whitespace-nowrap">
                                     <span className="truncate max-w-[130px]">{cat.name}</span>
                                     <FiChevronDown size={13} strokeWidth={2.5} className="text-gray-400 shrink-0" />
                                 </Link>

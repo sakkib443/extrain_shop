@@ -193,7 +193,7 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
     return (
         <div ref={rootRef} className="relative w-full">
             <div
-                className={`hd-pill flex items-center w-full transition-shadow duration-200 focus-within:shadow-[0_0_0_3px_rgba(var(--color-primary-rgb),0.10)] ${ isMobile ? 'h-11 rounded-xl px-1' : 'h-[var(--hd-control)] rounded-xl px-1.5' }`}
+                className={`hd-pill flex items-center w-full transition-shadow duration-200 focus-within:shadow-[0_0_0_3px_rgba(var(--color-primary-rgb),0.10)] ${ isMobile ? 'h-11 rounded-[var(--hd-radius)] px-1' : 'h-[var(--hd-control)] rounded-[var(--hd-radius)] px-1.5' }`}
                 style={{ background: '#ffffff' }}
             >
                 {leading}
@@ -243,7 +243,7 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
 
             {/* ─────────────── Autocomplete dropdown ─────────────── */}
             {open && trimmed.length > 0 && (
-                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-xl shadow-2xl shadow-gray-900/15 border border-gray-100 z-[60] overflow-hidden max-h-[70vh] overflow-y-auto">
+                <div className="absolute top-full left-0 right-0 mt-2 bg-white rounded-[var(--hd-radius)] shadow-2xl shadow-gray-900/15 border border-gray-100 z-[60] overflow-hidden max-h-[70vh] overflow-y-auto">
                     {/* Loading */}
                     {isFetching && !hasResults && (
                         <div className="px-4 py-6 text-center text-[13px] text-gray-400">
@@ -334,7 +334,7 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
 
             {/* Listening overlay hint (mobile + desktop) */}
             {listening && (
-                <div className="absolute top-full left-0 right-0 mt-2 z-[55] flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-white shadow-lg border border-gray-100 text-[12.5px] text-gray-600">
+                <div className="absolute top-full left-0 right-0 mt-2 z-[55] flex items-center justify-center gap-2 px-4 py-2.5 rounded-[var(--hd-radius)] bg-white shadow-lg border border-gray-100 text-[12.5px] text-gray-600">
                     <span className="relative flex h-2.5 w-2.5">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75" style={{ background: 'var(--color-primary)' }} />
                         <span className="relative inline-flex rounded-full h-2.5 w-2.5" style={{ background: 'var(--color-primary)' }} />
