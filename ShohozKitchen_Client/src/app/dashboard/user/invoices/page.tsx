@@ -97,7 +97,7 @@ export default function UserInvoicesPage() {
                                 </div>
 
                                 <div className="text-left sm:text-right">
-                                    <p className="text-base font-bold text-[var(--color-primary)]">৳{order.total?.toLocaleString() || 0}</p>
+                                    <p className="text-base font-bold text-[var(--color-primary)]">৳{order.total?.toLocaleString('en-US') || 0}</p>
                                 </div>
 
                                 <div className="flex items-center gap-2">

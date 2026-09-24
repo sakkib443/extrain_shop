@@ -299,7 +299,7 @@ const OrderModal: React.FC<OrderModalProps> = ({
                     <div style={{ marginTop: '20px', padding: '12px', background: '#f9fafb', borderRadius: '6px', border: '1px solid #e5e7eb' }}>
                         <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '13px', color: '#555' }}>
                             <span>Total Items: <strong>{totalQty}</strong></span>
-                            <span>Total: <strong style={{ color: '#1a1a1a', fontSize: '15px' }}>৳{totalPrice.toLocaleString()}</strong></span>
+                            <span>Total: <strong style={{ color: '#1a1a1a', fontSize: '15px' }}>৳{totalPrice.toLocaleString('en-US')}</strong></span>
                         </div>
                     </div>
                 )}

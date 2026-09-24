@@ -78,7 +78,7 @@ const CategoryPage: React.FC<{ slug: string }> = ({ slug }) => {
                             {category.name}
                         </h1>
                         {category.productCount > 0 && (
-                            <p className="text-xs text-gray-400 mt-0.5">{category.productCount.toLocaleString()} products</p>
+                            <p className="text-xs text-gray-400 mt-0.5">{category.productCount.toLocaleString('en-US')} products</p>
                         )}
                     </div>
                 </div>

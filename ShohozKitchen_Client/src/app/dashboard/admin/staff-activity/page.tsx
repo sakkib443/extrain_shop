@@ -21,7 +21,7 @@ import {
 } from '../analytics/_components/period';
 
 const cx = (...c: (string | false | undefined)[]) => c.filter(Boolean).join(' ');
-const fmtMoney = (n: number) => `৳${(n || 0).toLocaleString()}`;
+const fmtMoney = (n: number) => `৳${(n || 0).toLocaleString('en-US')}`;
 
 const fmtWhen = (iso: string) =>
     new Date(iso).toLocaleString('en-GB', {
@@ -167,10 +167,10 @@ export default function StaffActivityPage() {
                 <>
                     {/* ── Totals ─────────────────────────────────── */}
                     <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-                        <Stat label="Orders confirmed" value={(totals?.confirmed ?? 0).toLocaleString()} hint="by staff, in this period" />
+                        <Stat label="Orders confirmed" value={(totals?.confirmed ?? 0).toLocaleString('en-US')} hint="by staff, in this period" />
                         <Stat label="Value confirmed" value={fmtMoney(totals?.confirmedValue ?? 0)} />
-                        <Stat label="Delivered" value={(totals?.delivered ?? 0).toLocaleString()} />
-                        <Stat label="All status changes" value={(totals?.total ?? 0).toLocaleString()} />
+                        <Stat label="Delivered" value={(totals?.delivered ?? 0).toLocaleString('en-US')} />
+                        <Stat label="All status changes" value={(totals?.total ?? 0).toLocaleString('en-US')} />
                     </div>
 
                     {/* ── Leaderboard ────────────────────────────── */}

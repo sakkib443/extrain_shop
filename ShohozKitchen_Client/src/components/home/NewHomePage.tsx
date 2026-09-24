@@ -124,7 +124,7 @@ const NewHomePage: React.FC = () => {
         return (
             <div>
                 <div className="w-full mx-auto px-2 sm:px-4 py-4 sm:py-6">
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-3">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-3">
                         {[...Array(10)].map((_, i) => (
                             <div key={i} className="bg-white border border-gray-200 rounded-md overflow-hidden animate-pulse">
                                 <div className="aspect-square bg-gray-200" />
@@ -210,7 +210,7 @@ const NewHomePage: React.FC = () => {
                             <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-gray-500 max-w-md mx-auto hidden sm:block">Trending items loved by our customers worldwide.</p>
                         </div>
 
-                        <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4 transition-opacity duration-200 ${isFetchingFeatured ? 'opacity-60' : 'opacity-100'}`}>
+                        <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 transition-opacity duration-200 ${isFetchingFeatured ? 'opacity-60' : 'opacity-100'}`}>
                             {featuredProducts.slice(0, 12).map((product: any) => (
                                 <NewProductCard
                                     key={`feat-${product._id}`}
@@ -267,7 +267,7 @@ const NewHomePage: React.FC = () => {
                             <p className="mt-1.5 sm:mt-2 text-xs sm:text-sm text-gray-500 max-w-md mx-auto hidden sm:block">Freshly added products you don&apos;t want to miss.</p>
                         </div>
 
-                        <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4 transition-opacity duration-200 ${isFetchingNew ? 'opacity-60' : 'opacity-100'}`}>
+                        <div className={`grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4 transition-opacity duration-200 ${isFetchingNew ? 'opacity-60' : 'opacity-100'}`}>
                             {newArrivalProducts.slice(0, 12).map((product: any) => (
                                 <NewProductCard
                                     key={`new-${product._id}`}
@@ -356,7 +356,7 @@ const NewHomePage: React.FC = () => {
 
                 {/* Loading more skeleton */}
                 {isLoadingMore && (
-                    <div className="mt-4 sm:mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-2 sm:gap-4">
+                    <div className="mt-4 sm:mt-6 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2 sm:gap-4">
                         {[...Array(5)].map((_, i) => (
                             <div key={`skeleton-${i}`} className="bg-white border border-gray-200 rounded-md overflow-hidden animate-pulse">
                                 <div className="aspect-square bg-gray-200" />

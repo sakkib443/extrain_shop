@@ -187,7 +187,7 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
     };
 
     const fmtPrice = (p?: number) =>
-        typeof p === 'number' ? `৳${p.toLocaleString()}` : '';
+        typeof p === 'number' ? `৳${p.toLocaleString('en-US')}` : '';
 
     /* ───────────────────────────── render ───────────────────────────── */
     return (

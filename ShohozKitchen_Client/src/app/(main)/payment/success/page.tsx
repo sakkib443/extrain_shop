@@ -81,7 +81,7 @@ const PaymentSuccessInner = () => {
                                 {amount != null && (
                                     <div className="flex justify-between text-sm">
                                         <span className="text-gray-500">Amount</span>
-                                        <span className="font-bold text-gray-900">৳{Number(amount).toLocaleString()}</span>
+                                        <span className="font-bold text-gray-900">৳{Number(amount).toLocaleString('en-US')}</span>
                                     </div>
                                 )}
                                 {transaction?.method && (

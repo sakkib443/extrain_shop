@@ -161,7 +161,7 @@ export default function UserDashboard() {
                                     </p>
                                 </div>
                                 <div className="flex flex-col items-end gap-1 flex-shrink-0">
-                                    <span className="text-sm font-bold text-[var(--color-primary)] whitespace-nowrap">৳{order.total?.toLocaleString()}</span>
+                                    <span className="text-sm font-bold text-[var(--color-primary)] whitespace-nowrap">৳{order.total?.toLocaleString('en-US')}</span>
                                     <StatusBadge status={order.status} />
                                 </div>
                                 <FiChevronRight size={16} className="text-gray-300 hidden sm:block flex-shrink-0" />

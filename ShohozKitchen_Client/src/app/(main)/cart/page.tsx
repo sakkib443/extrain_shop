@@ -417,9 +417,9 @@ const CartPage = () => {
                         <div className="min-w-0 flex-1">
                             <h3 className="text-sm text-gray-800 line-clamp-2 leading-snug">{item.name}</h3>
                             <div className="flex items-center gap-2 mt-1 flex-wrap">
-                                <span className="text-sm font-semibold text-[var(--color-primary)]">৳{item.price.toLocaleString()}</span>
+                                <span className="text-sm font-semibold text-[var(--color-primary)]">৳{item.price.toLocaleString('en-US')}</span>
                                 {item.mrp && item.mrp > 0 && item.mrp !== item.price && (
-                                    <span className="text-xs text-gray-400 line-through">৳{item.mrp.toLocaleString()}</span>
+                                    <span className="text-xs text-gray-400 line-through">৳{item.mrp.toLocaleString('en-US')}</span>
                                 )}
                                 {typeof item.discount === 'number' && (item.discount > 0 || (item.mrp && item.mrp > 0 && item.mrp !== item.price)) && (
                                     <span className="text-[10px] font-bold text-[var(--color-primary)] bg-[var(--color-primary)]/[0.1] px-1.5 py-0.5 rounded">
@@ -582,9 +582,9 @@ const CartPage = () => {
                                                 const showDiscountBadge = (typeof item.discount === 'number' && (item.discount > 0 || showStrikePrice)) || itemDiscount > 0;
                                                 return (
                                                     <div className="mt-1.5 flex items-baseline gap-2 flex-wrap">
-                                                        <span className="text-sm font-semibold text-[var(--color-primary)]">৳{item.price.toLocaleString()}</span>
+                                                        <span className="text-sm font-semibold text-[var(--color-primary)]">৳{item.price.toLocaleString('en-US')}</span>
                                                         {showStrikePrice && (
-                                                            <span className="text-xs text-gray-400 line-through">৳{item.mrp.toLocaleString()}</span>
+                                                            <span className="text-xs text-gray-400 line-through">৳{item.mrp.toLocaleString('en-US')}</span>
                                                         )}
                                                         {showDiscountBadge && (
                                                             <span className="text-[10px] font-bold text-[var(--color-primary)] bg-[var(--color-primary)]/[0.1] px-1.5 py-0.5 rounded">
@@ -633,8 +633,8 @@ const CartPage = () => {
                                                 {/* Line total + mobile delete */}
                                                 <div className="flex items-end gap-2">
                                                     <div className="text-right">
-                                                        <p className="text-[11px] text-gray-400">৳{item.price.toLocaleString()} × {item.quantity}</p>
-                                                        <p className="text-base font-bold text-gray-900">৳{(item.price * item.quantity).toLocaleString()}</p>
+                                                        <p className="text-[11px] text-gray-400">৳{item.price.toLocaleString('en-US')} × {item.quantity}</p>
+                                                        <p className="text-base font-bold text-gray-900">৳{(item.price * item.quantity).toLocaleString('en-US')}</p>
                                                     </div>
                                                     <button
                                                         onClick={() => setDeleteConfirmId(item.id)}
@@ -723,7 +723,7 @@ const CartPage = () => {
                             <div className="px-5 py-4 space-y-2.5">
                                 <div className="flex justify-between text-sm">
                                     <span className="text-gray-500">Subtotal ({selectedQty} {selectedQty === 1 ? 'item' : 'items'})</span>
-                                    <span className="text-gray-900 font-medium">৳{selectedSubtotal.toLocaleString()}</span>
+                                    <span className="text-gray-900 font-medium">৳{selectedSubtotal.toLocaleString('en-US')}</span>
                                 </div>
                                 {appliedCoupon && (
                                     <div className="flex justify-between text-sm text-green-600">
@@ -734,7 +734,7 @@ const CartPage = () => {
                                         {appliedCoupon.freeShipping && appliedCoupon.discount === 0 ? (
                                             <span className="font-medium">Free shipping</span>
                                         ) : (
-                                            <span className="font-medium">-৳{appliedCoupon.discount.toLocaleString()}</span>
+                                            <span className="font-medium">-৳{appliedCoupon.discount.toLocaleString('en-US')}</span>
                                         )}
                                     </div>
                                 )}
@@ -754,7 +754,7 @@ const CartPage = () => {
                                 </div>
                                 {remainingForFree > 0 && (
                                     <div className="text-[11px] font-medium text-emerald-700 bg-emerald-50 border border-emerald-100 rounded-md px-2.5 py-1.5 flex items-center gap-1.5">
-                                        🚚 Add <span className="font-bold">৳{remainingForFree.toLocaleString()}</span> more for FREE shipping
+                                        🚚 Add <span className="font-bold">৳{remainingForFree.toLocaleString('en-US')}</span> more for FREE shipping
                                     </div>
                                 )}
                                 <div className="flex justify-between items-center pt-3 mt-1 border-t border-gray-100">
@@ -764,9 +764,9 @@ const CartPage = () => {
                                     </span>
                                     <div className="text-right">
                                         {appliedCoupon && (
-                                            <p className="text-xs line-through text-gray-400">৳{(selectedSubtotal + shippingCost).toLocaleString()}</p>
+                                            <p className="text-xs line-through text-gray-400">৳{(selectedSubtotal + shippingCost).toLocaleString('en-US')}</p>
                                         )}
-                                        <span className="text-xl font-bold text-[var(--color-primary)]">৳{finalTotal.toLocaleString()}</span>
+                                        <span className="text-xl font-bold text-[var(--color-primary)]">৳{finalTotal.toLocaleString('en-US')}</span>
                                     </div>
                                 </div>
                             </div>
@@ -805,7 +805,7 @@ const CartPage = () => {
             <div className="lg:hidden fixed bottom-0 inset-x-0 z-40 bg-white border-t border-gray-200 px-4 py-3 flex items-center justify-between gap-3 shadow-[0_-2px_10px_rgba(0,0,0,0.05)]">
                 <div className="min-w-0">
                     <p className="text-[11px] text-gray-500">Total</p>
-                    <p className="text-lg font-bold text-[var(--color-primary)] leading-none">৳{finalTotal.toLocaleString()}</p>
+                    <p className="text-lg font-bold text-[var(--color-primary)] leading-none">৳{finalTotal.toLocaleString('en-US')}</p>
                 </div>
                 {!canCheckout ? (
                     <button disabled className="flex items-center justify-center gap-1.5 px-6 py-3 bg-gray-200 text-gray-400 rounded-md text-sm font-semibold flex-shrink-0 cursor-not-allowed">

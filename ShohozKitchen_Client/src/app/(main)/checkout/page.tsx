@@ -919,9 +919,9 @@ const CheckoutPage = () => {
                                                         </button>
                                                     </div>
                                                     <div className="text-right">
-                                                        <span className="text-xs font-bold text-gray-900">৳{(item.price * item.quantity).toLocaleString()}</span>
+                                                        <span className="text-xs font-bold text-gray-900">৳{(item.price * item.quantity).toLocaleString('en-US')}</span>
                                                         {item.quantity > 1 && (
-                                                            <p className="text-[10px] text-gray-400">৳{item.price.toLocaleString()} × {item.quantity}</p>
+                                                            <p className="text-[10px] text-gray-400">৳{item.price.toLocaleString('en-US')} × {item.quantity}</p>
                                                         )}
                                                     </div>
                                                 </div>
@@ -934,14 +934,14 @@ const CheckoutPage = () => {
                                 <div className="px-5 py-4 space-y-2.5 border-t border-gray-100">
                                     <div className="flex justify-between text-sm">
                                         <span className="text-gray-500">Subtotal</span>
-                                        <span className="text-gray-900 font-medium">৳{totalPrice.toLocaleString()}</span>
+                                        <span className="text-gray-900 font-medium">৳{totalPrice.toLocaleString('en-US')}</span>
                                     </div>
                                     {appliedCoupon && (
                                         <div className="flex justify-between text-sm text-green-600">
                                             <span className="flex items-center gap-1">
                                                 <FiTag size={12} /> Coupon ({appliedCoupon.code})
                                             </span>
-                                            <span className="font-medium">-৳{appliedCoupon.discount.toLocaleString()}</span>
+                                            <span className="font-medium">-৳{appliedCoupon.discount.toLocaleString('en-US')}</span>
                                         </div>
                                     )}
                                     <div className="flex justify-between text-sm">
@@ -958,7 +958,7 @@ const CheckoutPage = () => {
                                             </span>
                                         ) : area ? (
                                             <span className="text-right">
-                                                <span className="text-gray-900">৳{shippingCost.toLocaleString()}</span>
+                                                <span className="text-gray-900">৳{shippingCost.toLocaleString('en-US')}</span>
                                                 <span className="block text-[10px] text-gray-400">{area === 'inside_dhaka' ? 'Inside Dhaka' : 'Outside Dhaka'}</span>
                                             </span>
                                         ) : (
@@ -971,10 +971,10 @@ const CheckoutPage = () => {
                                         <span className="text-sm font-semibold text-gray-900">Total</span>
                                         <div className="text-right">
                                             {appliedCoupon && (
-                                                <p className="text-xs line-through text-gray-400">৳{(totalPrice + shippingCost).toLocaleString()}</p>
+                                                <p className="text-xs line-through text-gray-400">৳{(totalPrice + shippingCost).toLocaleString('en-US')}</p>
                                             )}
                                             <span className="text-xl font-bold text-[var(--color-primary)]">
-                                                ৳{orderTotal.toLocaleString()}
+                                                ৳{orderTotal.toLocaleString('en-US')}
                                             </span>
                                         </div>
                                     </div>

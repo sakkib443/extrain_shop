@@ -26,7 +26,7 @@ const STATUS_TABS: { label: string; value: ReturnStatus | 'all' }[] = [
 const reasonLabel = (value: string) =>
     RETURN_REASONS.find((r) => r.value === value)?.label || value;
 
-const fmt = (n: number) => `৳${(n || 0).toLocaleString()}`;
+const fmt = (n: number) => `৳${(n || 0).toLocaleString('en-US')}`;
 
 const fmtDate = (d?: string) =>
     d

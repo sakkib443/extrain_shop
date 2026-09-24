@@ -70,7 +70,7 @@ const PaymentSimulateInner = () => {
                     <div className="text-center mb-6">
                         <p className="text-xs text-gray-400 mb-1">Amount to pay via {methodLabel(method)}</p>
                         <p className="text-4xl font-black text-gray-900">
-                            ৳{amountNum != null && !Number.isNaN(amountNum) ? amountNum.toLocaleString() : '—'}
+                            ৳{amountNum != null && !Number.isNaN(amountNum) ? amountNum.toLocaleString('en-US') : '—'}
                         </p>
                     </div>
 
@@ -103,7 +103,7 @@ const PaymentSimulateInner = () => {
                             ) : (
                                 <>
                                     <FiCheck size={16} />
-                                    Pay Now ৳{amountNum != null && !Number.isNaN(amountNum) ? amountNum.toLocaleString() : ''}
+                                    Pay Now ৳{amountNum != null && !Number.isNaN(amountNum) ? amountNum.toLocaleString('en-US') : ''}
                                 </>
                             )}
                         </button>

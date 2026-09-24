@@ -150,7 +150,7 @@ export default function MyPaymentsPage() {
                                                 )}
                                             </td>
                                             <td className="px-5 py-4 text-gray-600">{methodLabel(p.method)}</td>
-                                            <td className="px-5 py-4 text-right font-bold text-gray-900">৳{Number(p.amount || 0).toLocaleString()}</td>
+                                            <td className="px-5 py-4 text-right font-bold text-gray-900">৳{Number(p.amount || 0).toLocaleString('en-US')}</td>
                                             <td className="px-5 py-4 text-center"><StatusBadge status={p.status} /></td>
                                             <td className="px-5 py-4 text-right">
                                                 {canRetry ? (
@@ -182,7 +182,7 @@ export default function MyPaymentsPage() {
                                 <div key={p._id} className="bg-white rounded-2xl border border-gray-100 shadow-sm p-4">
                                     <div className="flex items-start justify-between mb-3">
                                         <div>
-                                            <p className="text-base font-bold text-gray-900">৳{Number(p.amount || 0).toLocaleString()}</p>
+                                            <p className="text-base font-bold text-gray-900">৳{Number(p.amount || 0).toLocaleString('en-US')}</p>
                                             <p className="text-xs text-gray-400 mt-0.5">{fmtDate(p.createdAt)}</p>
                                         </div>
                                         <StatusBadge status={p.status} />

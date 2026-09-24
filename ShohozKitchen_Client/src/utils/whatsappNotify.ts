@@ -29,7 +29,7 @@ export function sendOrderToWhatsApp(data: {
 📦 *Items:*
 ${itemLines}
 
-💰 *Total:* ৳${data.totalPrice?.toLocaleString() || '—'}
+💰 *Total:* ৳${data.totalPrice?.toLocaleString('en-US') || '—'}
 ${data.note ? `📝 *Note:* ${data.note}` : ''}
 ⏰ ${new Date().toLocaleString('en-BD')}`;
 

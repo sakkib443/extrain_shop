@@ -27,7 +27,7 @@ export default function PaymentsPage() {
     const meta = ordersData?.meta || { total: 0, totalPages: 1 };
     const stats = summaryData?.data || {};
 
-    const formatCurrency = (n: number) => `৳${(n || 0).toLocaleString()}`;
+    const formatCurrency = (n: number) => `৳${(n || 0).toLocaleString('en-US')}`;
 
     const paymentStatusConfig: Record<string, { bg: string; text: string; icon: any }> = {
         paid: { bg: 'bg-green-50', text: 'text-green-700', icon: FiCheckCircle },
@@ -51,8 +51,8 @@ export default function PaymentsPage() {
                 {[
                     { label: 'Total Revenue', value: formatCurrency(stats.totalRevenue || 0), icon: FiDollarSign, color: 'var(--color-primary)', bg: 'bg-green-50' },
                     { label: "Today's Revenue", value: formatCurrency(stats.todayRevenue || 0), icon: FiTrendingUp, color: '#3B82F6', bg: 'bg-blue-50' },
-                    { label: 'Paid Orders', value: (stats.paidOrders || 0).toLocaleString(), icon: FiCheckCircle, color: 'var(--color-primary)', bg: 'bg-emerald-50' },
-                    { label: 'Pending Payments', value: (stats.pendingPayments || 0).toLocaleString(), icon: FiClock, color: '#D97706', bg: 'bg-amber-50' },
+                    { label: 'Paid Orders', value: (stats.paidOrders || 0).toLocaleString('en-US'), icon: FiCheckCircle, color: 'var(--color-primary)', bg: 'bg-emerald-50' },
+                    { label: 'Pending Payments', value: (stats.pendingPayments || 0).toLocaleString('en-US'), icon: FiClock, color: '#D97706', bg: 'bg-amber-50' },
                 ].map((item, i) => (
                     <div key={i} className="bg-white rounded-xl p-5 border border-gray-200 shadow-sm">
                         <div className="flex items-center justify-between mb-3">

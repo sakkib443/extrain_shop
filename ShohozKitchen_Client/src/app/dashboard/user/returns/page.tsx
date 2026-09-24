@@ -110,7 +110,7 @@ export default function MyReturnsPage() {
                                         </div>
                                         <div className="flex flex-col items-end gap-1 flex-shrink-0">
                                             <span className="text-sm font-bold text-[var(--color-primary)] whitespace-nowrap">
-                                                ৳{(ret.refundAmount || 0).toLocaleString()}
+                                                ৳{(ret.refundAmount || 0).toLocaleString('en-US')}
                                             </span>
                                             <span className="text-gray-300">
                                                 {isOpen ? <FiChevronUp size={16} /> : <FiChevronDown size={16} />}
@@ -150,7 +150,7 @@ export default function MyReturnsPage() {
                                                             <p className="text-xs text-gray-400">Qty: {item.quantity}</p>
                                                         </div>
                                                         <span className="text-sm font-semibold text-gray-600 whitespace-nowrap">
-                                                            ৳{((item.price || 0) * (item.quantity || 1)).toLocaleString()}
+                                                            ৳{((item.price || 0) * (item.quantity || 1)).toLocaleString('en-US')}
                                                         </span>
                                                     </div>
                                                 ))}

@@ -226,7 +226,7 @@ function SendToSteadfastModal({ order, pkg, title, sending, error, onCancel, onC
                     <div className={`rounded-md border px-4 py-3 ${p.codAmount > 0 ? 'bg-emerald-50 border-emerald-200' : 'bg-gray-50 border-gray-200'}`}>
                         <div className="flex items-center justify-between gap-3">
                             <span className={`text-sm font-semibold ${p.codAmount > 0 ? 'text-emerald-700' : 'text-gray-600'}`}>COD amount Steadfast will collect</span>
-                            <span className={`text-lg font-bold ${p.codAmount > 0 ? 'text-emerald-700' : 'text-gray-500'}`}>৳{p.codAmount.toLocaleString()}</span>
+                            <span className={`text-lg font-bold ${p.codAmount > 0 ? 'text-emerald-700' : 'text-gray-500'}`}>৳{p.codAmount.toLocaleString('en-US')}</span>
                         </div>
                         {codHint && <p className="text-xs text-gray-500 mt-1">{codHint}</p>}
                     </div>
@@ -526,10 +526,10 @@ export default function OrderDetailsPage() {
                                             {soldBelowList || item.priceOverridden ? (
                                                 <td className="px-6 py-4 text-sm text-gray-600">
                                                     {soldBelowList && (
-                                                        <span className="block text-xs text-gray-400 line-through">৳{original.toLocaleString()}</span>
+                                                        <span className="block text-xs text-gray-400 line-through">৳{original.toLocaleString('en-US')}</span>
                                                     )}
                                                     <span className="inline-flex items-center gap-1.5 flex-wrap">
-                                                        ৳{price.toLocaleString()}
+                                                        ৳{price.toLocaleString('en-US')}
                                                         {soldBelowList && (
                                                             <span className="text-[10px] font-bold text-red-600 bg-red-50 px-1.5 py-0.5 rounded">
                                                                 −{Math.round(pctOff * 10) / 10}%
@@ -543,10 +543,10 @@ export default function OrderDetailsPage() {
                                                     )}
                                                 </td>
                                             ) : (
-                                                <td className="px-6 py-4 text-sm text-gray-600">৳{price.toLocaleString()}</td>
+                                                <td className="px-6 py-4 text-sm text-gray-600">৳{price.toLocaleString('en-US')}</td>
                                             )}
                                             <td className="px-6 py-4 text-sm text-gray-600">x{item.quantity}</td>
-                                            <td className="px-6 py-4 text-right text-sm font-bold text-gray-800">৳{lineTotal.toLocaleString()}</td>
+                                            <td className="px-6 py-4 text-right text-sm font-bold text-gray-800">৳{lineTotal.toLocaleString('en-US')}</td>
                                         </tr>
                                         );
                                     })}
@@ -558,11 +558,11 @@ export default function OrderDetailsPage() {
                             <div className="flex flex-col gap-2 ml-auto max-w-xs">
                                 <div className="flex justify-between text-sm text-gray-500">
                                     <span>Subtotal:</span>
-                                    <span className="font-bold text-gray-800">৳{(order.subtotal || 0).toLocaleString()}</span>
+                                    <span className="font-bold text-gray-800">৳{(order.subtotal || 0).toLocaleString('en-US')}</span>
                                 </div>
                                 <div className="flex justify-between text-sm text-gray-500">
                                     <span>Shipping:</span>
-                                    <span className="font-bold text-gray-800">৳{(order.shippingCost || 0).toLocaleString()}</span>
+                                    <span className="font-bold text-gray-800">৳{(order.shippingCost || 0).toLocaleString('en-US')}</span>
                                 </div>
                                 {order.discount > 0 && (
                                     <>
@@ -574,14 +574,14 @@ export default function OrderDetailsPage() {
                                         )}
                                         <div className="flex justify-between text-sm text-red-500">
                                             <span>Discount:</span>
-                                            <span className="font-bold">-৳{(order.discount || 0).toLocaleString()}</span>
+                                            <span className="font-bold">-৳{(order.discount || 0).toLocaleString('en-US')}</span>
                                         </div>
                                     </>
                                 )}
                                 <div className="h-px bg-gray-200 my-2"></div>
                                 <div className="flex justify-between text-lg font-bold text-gray-900">
                                     <span>Total:</span>
-                                    <span className="text-[var(--color-primary)]">৳{(order.total || 0).toLocaleString()}</span>
+                                    <span className="text-[var(--color-primary)]">৳{(order.total || 0).toLocaleString('en-US')}</span>
                                 </div>
                             </div>
                         </div>

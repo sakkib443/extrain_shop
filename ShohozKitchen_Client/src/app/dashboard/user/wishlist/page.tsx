@@ -163,11 +163,11 @@ export default function WishlistPage() {
                                 {/* Price */}
                                 <div className="flex items-center gap-2 mt-3">
                                     <span className="text-lg font-bold text-[var(--color-primary)]">
-                                        ৳{(product.discountPrice || product.price)?.toLocaleString()}
+                                        ৳{(product.discountPrice || product.price)?.toLocaleString('en-US')}
                                     </span>
                                     {product.discountPrice && product.discountPrice < product.price && (
                                         <span className="text-xs text-gray-400 line-through">
-                                            ৳{product.price?.toLocaleString()}
+                                            ৳{product.price?.toLocaleString('en-US')}
                                         </span>
                                     )}
                                 </div>

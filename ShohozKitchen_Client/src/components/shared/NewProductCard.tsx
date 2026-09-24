@@ -15,7 +15,7 @@ import { useToggleWishlistMutation, useGetWishlistQuery } from '@/redux/api/user
 import { useAppDispatch, useAppSelector } from '@/redux';
 import { addToCart } from '@/redux/slices/cartSlice';
 import { toggleWishlist } from '@/redux/slices/wishlistSlice';
-import { FiStar, FiX, FiCopy, FiCheck, FiSend, FiThumbsUp, FiCornerDownRight, FiHeart, FiEye, FiShuffle, FiShoppingBag, FiTrendingUp } from 'react-icons/fi';
+import { FiStar, FiX, FiCopy, FiCheck, FiSend, FiThumbsUp, FiCornerDownRight, FiHeart, FiEye, FiTrendingUp } from "react-icons/fi";
 import { getDisplayPrice } from '@/utils/offerPrice';
 
 interface Product {
@@ -56,6 +56,35 @@ const formatCount = (n: number): string => {
     if (n >= 1000) return (n / 1000).toFixed(n >= 10000 ? 0 : 1) + 'K';
     return String(n);
 };
+
+/* Drawn here rather than taken from react-icons: the set's bag glyphs are all
+   handle-and-body outlines, and the mark the card wants is a lidded basket —
+   a flat top with the handle arc above it. A few paths are cheaper than
+   shipping another icon font for one shape. */
+const BasketIcon: React.FC<{ size?: number }> = ({ size = 17 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden
+        stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        {/* handle */}
+        <path d="M8.5 7.5V6a3.5 3.5 0 0 1 7 0v1.5" />
+        {/* lid */}
+        <path d="M3.8 8.4h16.4" />
+        {/* body, tapering to a rounded base */}
+        <path d="M5.4 8.4h13.2l-1 9.2a2.6 2.6 0 0 1-2.6 2.3H9a2.6 2.6 0 0 1-2.6-2.3z" />
+    </svg>
+);
+
+/* Compare: two lanes swapping over each other. react-icons' shuffle puts the
+   arrowheads at different heights, which reads as a shuffle rather than a
+   like-for-like comparison — these two mirror each other exactly. */
+const CompareIcon: React.FC<{ size?: number }> = ({ size = 16 }) => (
+    <svg width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden
+        stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M3 7.5h4.2c3.4 0 3.4 9 6.8 9H21" />
+        <path d="M3 16.5h4.2c3.4 0 3.4-9 6.8-9H21" />
+        <path d="m18.2 4.6 2.8 2.9-2.8 2.9" />
+        <path d="m18.2 13.6 2.8 2.9-2.8 2.9" />
+    </svg>
+);
 
 const NewProductCard: React.FC<NewProductCardProps> = ({ product }) => {
 
@@ -182,6 +211,14 @@ const NewProductCard: React.FC<NewProductCardProps> = ({ product }) => {
                 </span>
             )}
 
+            {/* Low stock, over the foot of the picture. Under ten is a real reason
+                to hurry; anything more and the badge is just decoration. */}
+            {inStock && product.stock !== undefined && product.stock <= 10 && (
+                <span className='pc-badge-low absolute bottom-[30%] left-3 z-20'>
+                    Only {product.stock} left!
+                </span>
+            )}
+
             {/* ── Details ────────────────────────────────────────────────── */}
             <div className='pc-body relative mt-auto flex flex-1 flex-col gap-2.5 rounded-[18px] px-4 pb-4 pt-7'>
 
@@ -195,7 +232,7 @@ const NewProductCard: React.FC<NewProductCardProps> = ({ product }) => {
                         <FiHeart size={15} style={{ fill: isInWishlist ? 'currentColor' : 'none' }} />
                     </button>
                     <Link href={href} aria-label='Compare' className='pc-icon'>
-                        <FiShuffle size={15} />
+                        <CompareIcon size={16} />
                     </Link>
                 </div>
 
@@ -229,7 +266,7 @@ const NewProductCard: React.FC<NewProductCardProps> = ({ product }) => {
 
                 <div className='mt-1 flex items-center gap-2'>
                     <button onClick={handleAddToCart} className='pc-cart' disabled={!inStock}>
-                        <FiShoppingBag size={15} strokeWidth={2.2} />
+                        <BasketIcon size={17} />
                         {isInCart ? 'In Cart' : 'Add to Cart'}
                     </button>
                     <Link href={href} aria-label='Quick view' className='pc-icon pc-icon-lg'>

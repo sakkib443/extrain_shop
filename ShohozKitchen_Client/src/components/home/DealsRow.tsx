@@ -56,10 +56,10 @@ const DealCard: React.FC<{ p: any }> = ({ p }) => {
             <div className="p-1.5">
                 <div className="flex items-baseline gap-1">
                     <span className="text-sm font-bold" style={{ color: 'var(--color-sale)' }}>
-                        ৳{Number(p.price).toLocaleString()}
+                        ৳{Number(p.price).toLocaleString('en-US')}
                     </span>
                     {original && original > p.price && (
-                        <span className="text-[10px] text-gray-400 line-through">৳{Number(original).toLocaleString()}</span>
+                        <span className="text-[10px] text-gray-400 line-through">৳{Number(original).toLocaleString('en-US')}</span>
                     )}
                 </div>
             </div>

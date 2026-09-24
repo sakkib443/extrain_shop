@@ -153,7 +153,7 @@ export default function AdminProductModerationPage() {
                                         </td>
                                         {/* Price */}
                                         <td className="px-5 py-4">
-                                            <span className="text-sm font-semibold text-gray-800">৳{(product.price || 0).toLocaleString()}</span>
+                                            <span className="text-sm font-semibold text-gray-800">৳{(product.price || 0).toLocaleString('en-US')}</span>
                                         </td>
                                         {/* Status */}
                                         <td className="px-5 py-4">

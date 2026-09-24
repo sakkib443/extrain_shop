@@ -616,10 +616,10 @@ export default function ProductDetailsPage() {
                             <div style={{ marginBottom: '14px', paddingBottom: '14px', borderBottom: '1px solid #f3f4f6' }}>
                                 <div style={{ display: 'flex', alignItems: 'baseline', gap: '10px', flexWrap: 'wrap' }}>
                                     <span className="pd-price" style={{ fontSize: '28px', fontWeight: 800, color: 'var(--color-primary)', letterSpacing: '-0.5px' }}>
-                                        ৳{discountedPrice.toLocaleString()}
+                                        ৳{discountedPrice.toLocaleString('en-US')}
                                     </span>
                                     {strikePrice && strikePrice > 0 && strikePrice !== discountedPrice && (
-                                        <span style={{ fontSize: '15px', color: '#bbb', textDecoration: 'line-through' }}>৳{strikePrice.toLocaleString()}</span>
+                                        <span style={{ fontSize: '15px', color: '#bbb', textDecoration: 'line-through' }}>৳{strikePrice.toLocaleString('en-US')}</span>
                                     )}
                                     {showDiscountBadge && (
                                         <span style={{ fontSize: '12px', fontWeight: 700, color: 'var(--color-primary)', background: 'rgba(var(--color-primary-rgb), 0.1)', padding: '2px 8px', borderRadius: '4px' }}>
@@ -736,7 +736,7 @@ export default function ProductDetailsPage() {
                                             {product.shippingConfig?.freeShipping
                                                 ? ' · This item ships free'
                                                 : shipSettings?.freeShippingByThresholdEnabled && Number(shipSettings?.freeShippingThreshold) > 0
-                                                    ? ` · Free on orders over ৳${Number(shipSettings.freeShippingThreshold).toLocaleString()}`
+                                                    ? ` · Free on orders over ৳${Number(shipSettings.freeShippingThreshold).toLocaleString('en-US')}`
                                                     : ''}
                                         </p>
                                     </div>
@@ -1201,7 +1201,7 @@ export default function ProductDetailsPage() {
                                     <Image src={product.thumbnail || PRODUCT_IMAGE_FALLBACK} alt={product.name} width={52} height={52} style={{ width: '52px', height: '52px', objectFit: 'cover', borderRadius: '6px', flexShrink: 0 }} />
                                     <div>
                                         <p style={{ fontSize: '13px', fontWeight: 600, color: '#111', margin: '0 0 3px', lineHeight: 1.3 }}>{product.name}</p>
-                                        <p style={{ fontSize: '14px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>৳{discountedPrice.toLocaleString()}</p>
+                                        <p style={{ fontSize: '14px', fontWeight: 700, color: 'var(--color-primary)', margin: 0 }}>৳{discountedPrice.toLocaleString('en-US')}</p>
                                     </div>
                                 </div>
                                 {inquirySuccess ? (

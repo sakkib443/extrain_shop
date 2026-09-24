@@ -126,7 +126,7 @@ export default function BookCourierModal({ pkg, isBooking, onClose, onConfirm }:
                             </span>
                         </div>
                         <span className={`text-lg font-extrabold ${isCod ? 'text-emerald-700' : 'text-gray-400'}`}>
-                            ৳{(isCod ? pkg.codAmount : 0).toLocaleString()}
+                            ৳{(isCod ? pkg.codAmount : 0).toLocaleString('en-US')}
                         </span>
                     </div>
 

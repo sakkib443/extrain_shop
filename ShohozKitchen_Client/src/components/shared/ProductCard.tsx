@@ -124,9 +124,9 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
                             {product.name}
                         </h3>
                         <div className='flex items-center gap-2'>
-                            <span className='text-gray-900 font-black text-base'>৳{currentPrice.toLocaleString()}</span>
+                            <span className='text-gray-900 font-black text-base'>৳{currentPrice.toLocaleString('en-US')}</span>
                             {oldPrice && (
-                                <span className='text-gray-400 text-xs line-through font-medium'>৳{oldPrice.toLocaleString()}</span>
+                                <span className='text-gray-400 text-xs line-through font-medium'>৳{oldPrice.toLocaleString('en-US')}</span>
                             )}
                         </div>
                     </div>

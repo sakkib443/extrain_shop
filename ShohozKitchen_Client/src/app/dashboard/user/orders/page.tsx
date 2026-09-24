@@ -228,7 +228,7 @@ function MyOrdersContent() {
                                     <div className="flex items-center gap-3 ml-auto">
                                         <div className="text-right leading-none">
                                             <span className="block text-[10px] text-gray-400 mb-0.5">Total</span>
-                                            <span className="block text-lg font-bold text-[var(--color-primary)]">৳{order.total?.toLocaleString()}</span>
+                                            <span className="block text-lg font-bold text-[var(--color-primary)]">৳{order.total?.toLocaleString('en-US')}</span>
                                         </div>
                                         <FiChevronRight size={16} className="text-gray-300 group-hover:text-[var(--color-primary)] group-hover:translate-x-1 transition-all" />
                                     </div>

@@ -308,7 +308,7 @@ export default function OrderDetailPage() {
                                         <p className="text-xs text-gray-400 mt-1">Qty: {item.quantity}</p>
                                     </div>
                                     <p className="text-sm font-bold text-gray-800 whitespace-nowrap">
-                                        ৳{((item.price || 0) * (item.quantity || 1)).toLocaleString()}
+                                        ৳{((item.price || 0) * (item.quantity || 1)).toLocaleString('en-US')}
                                     </p>
                                 </div>
                             ))}
@@ -318,12 +318,12 @@ export default function OrderDetailPage() {
                         <div className="px-6 py-4 bg-gray-50/50 space-y-2">
                             <div className="flex justify-between text-sm">
                                 <span className="text-gray-400">Subtotal</span>
-                                <span className="font-semibold text-gray-600">৳{order.subtotal?.toLocaleString() || order.total?.toLocaleString()}</span>
+                                <span className="font-semibold text-gray-600">৳{order.subtotal?.toLocaleString('en-US') || order.total?.toLocaleString('en-US')}</span>
                             </div>
                             {order.shippingCost > 0 && (
                                 <div className="flex justify-between text-sm">
                                     <span className="text-gray-400">Shipping</span>
-                                    <span className="font-semibold text-gray-600">৳{order.shippingCost?.toLocaleString()}</span>
+                                    <span className="font-semibold text-gray-600">৳{order.shippingCost?.toLocaleString('en-US')}</span>
                                 </div>
                             )}
                             {order.discount > 0 && (
@@ -336,13 +336,13 @@ export default function OrderDetailPage() {
                                     )}
                                     <div className="flex justify-between text-sm">
                                         <span className="text-gray-400">Discount</span>
-                                        <span className="font-semibold text-emerald-600">-৳{order.discount?.toLocaleString()}</span>
+                                        <span className="font-semibold text-emerald-600">-৳{order.discount?.toLocaleString('en-US')}</span>
                                     </div>
                                 </>
                             )}
                             <div className="flex justify-between text-base pt-2 border-t border-gray-200 mt-2">
                                 <span className="font-bold text-gray-700">Total</span>
-                                <span className="font-bold text-[var(--color-primary)] text-lg">৳{order.total?.toLocaleString()}</span>
+                                <span className="font-bold text-[var(--color-primary)] text-lg">৳{order.total?.toLocaleString('en-US')}</span>
                             </div>
                         </div>
                     </div>

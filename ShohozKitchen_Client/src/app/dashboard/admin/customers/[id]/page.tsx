@@ -16,7 +16,7 @@ import { useGetAdminOrdersQuery } from '@/redux/api/orderApi';
 const formatDate = (d?: string) =>
     d ? new Date(d).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }) : '—';
 
-const taka = (n: number) => `৳${(n || 0).toLocaleString()}`;
+const taka = (n: number) => `৳${(n || 0).toLocaleString('en-US')}`;
 
 // Status badge (covers user + order statuses)
 const StatusBadge = ({ status }: { status: string }) => {
