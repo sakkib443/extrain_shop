@@ -872,3 +872,48 @@ h6 {
   border-radius: 4px;
   margin: 8px 0;
 }
+/* ═══════════════════════════════════════════════════════════════════
+   Storefront header — design tokens, font and the announcement ticker.
+
+   The header is the one surface that uses Urbanist instead of Poppins.
+   The global `* { font-family: Poppins !important }` rule above wins on
+   specificity, so this has to be scoped AND flagged to take effect.
+   ═══════════════════════════════════════════════════════════════════ */
+
+:root {
+  /* Warm metallic accents used only by the header. Swap these three for
+     --color-primary shades to pull the header onto the brand palette. */
+  --hd-gold: #d4a97a;          /* solid buttons: EXPLORE ALL */
+  --hd-gold-hover: #c89a6b;
+  --hd-gold-soft: #e9ccae47;   /* translucent fill: icon buttons */
+  --hd-gold-line: #deb475;     /* borders on highlighted pills */
+  --hd-gold-deep: #cb843b;     /* end stop of the top-bar text gradient */
+  --hd-dark: #1a1a1a;          /* mobile header slab */
+}
+
+.dz-header,
+.dz-header * {
+  font-family: "Urbanist", "Poppins", sans-serif !important;
+}
+
+/* ── Announcement ticker ──────────────────────────────────────────────
+   The track holds the item list twice over, so translating it exactly
+   -50% lands the copy where the original started and the loop is seamless.
+   Pausing on hover lets people actually read an offer they spotted. */
+@keyframes marquee-rtl {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.marquee-track {
+  animation: marquee-rtl 60s linear infinite;
+  will-change: transform;
+}
+
+.marquee-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}

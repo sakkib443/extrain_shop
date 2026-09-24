@@ -193,12 +193,23 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
     return (
         <div ref={rootRef} className="relative w-full">
             <div
-                className={`flex items-center w-full bg-white transition-shadow duration-200 focus-within:shadow-[0_0_0_3px_rgba(var(--color-primary-rgb),0.12)] ${
-                    isMobile ? 'h-[42px] rounded-md' : 'h-[46px] rounded-md'
+                className={`flex items-center w-full transition-shadow duration-200 focus-within:shadow-[0_0_0_3px_rgba(var(--color-primary-rgb),0.10)] ${
+                    isMobile ? 'h-[44px] rounded-[10px] px-2' : 'h-[54px] rounded-[10px] px-3'
                 }`}
-                style={{ border: '2px solid var(--color-primary)' }}
+                style={{ background: 'var(--color-soft)', border: '1px solid var(--color-soft-border)' }}
             >
                 {leading}
+
+                {/* Magnifier — doubles as the submit control, so the field needs no
+                    button of its own and keeps the flat one-piece look. */}
+                <button
+                    type="button"
+                    onClick={() => submit(value)}
+                    aria-label="Search"
+                    className="shrink-0 flex items-center justify-center text-gray-400 hover:text-gray-600 transition-colors px-2"
+                >
+                    <FiSearch size={isMobile ? 16 : 18} strokeWidth={2.2} />
+                </button>
 
                 {/* Text input */}
                 <input
@@ -234,19 +245,6 @@ const SearchAutocomplete: React.FC<SearchAutocompleteProps> = ({
                     </button>
                 )}
 
-                {/* Search button — sits flush at the right edge of the field */}
-                <button
-                    type="button"
-                    onClick={() => submit(value)}
-                    className={`shrink-0 rounded text-white font-semibold flex items-center justify-center gap-1.5 transition-opacity hover:opacity-90 active:opacity-75 ${
-                        isMobile ? 'px-3.5 h-[34px] mr-[3px] text-sm' : 'px-5 h-[38px] mr-[3px] text-sm'
-                    }`}
-                    style={{ background: 'var(--color-primary)' }}
-                    aria-label="Search"
-                >
-                    <FiSearch size={16} strokeWidth={2.4} />
-                    {!isMobile && <span className="hidden lg:inline">Search</span>}
-                </button>
             </div>
 
             {/* ─────────────── Autocomplete dropdown ─────────────── */}
