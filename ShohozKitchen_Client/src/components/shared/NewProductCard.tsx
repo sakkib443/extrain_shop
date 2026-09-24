@@ -15,7 +15,7 @@ import { useToggleWishlistMutation, useGetWishlistQuery } from '@/redux/api/user
 import { useAppDispatch, useAppSelector } from '@/redux';
 import { addToCart } from '@/redux/slices/cartSlice';
 import { toggleWishlist } from '@/redux/slices/wishlistSlice';
-import { FiStar, FiX, FiCopy, FiCheck, FiSend, FiThumbsUp, FiCornerDownRight, FiHeart } from 'react-icons/fi';
+import { FiStar, FiX, FiCopy, FiCheck, FiSend, FiThumbsUp, FiCornerDownRight, FiHeart, FiEye, FiShuffle, FiShoppingBag, FiTrendingUp } from 'react-icons/fi';
 import { getDisplayPrice } from '@/utils/offerPrice';
 
 interface Product {
@@ -43,6 +43,7 @@ interface Product {
     shareCount?: number;
     viewCount?: number;
     reviewCount?: number;
+    stock?: number;
 }
 
 interface NewProductCardProps {
@@ -146,91 +147,103 @@ const NewProductCard: React.FC<NewProductCardProps> = ({ product }) => {
         : 0;
     const soldCount = product.sold || product.soldCount || product.totalSold || 0;
 
+    const href = `/product/${product.slug || product.id}`;
+    const inStock = product.stock === undefined || product.stock > 0;
+
     return (
-        <>
-            <div className='bg-white border border-gray-200 overflow-hidden hover:border-[var(--color-primary)]/40 hover:shadow-md hover:shadow-slate-900/5 transition-all duration-300 group'>
-            <Link href={`/product/${product.slug || product.id}`}>
-                <div>
+        <div className='pc group relative flex h-full flex-col overflow-hidden rounded-[18px] bg-white transition-shadow duration-300'>
 
-                    {/* Product Image */}
-                    <div className='aspect-square bg-slate-50 overflow-hidden relative'>
-                        {/* Discount badge */}
-                        {discountPercent > 0 && (
-                            <span className='absolute top-2 left-2 z-10 bg-red-500 text-white text-[10px] font-bold px-2 py-0.5 rounded-sm shadow-sm'>
-                                -{discountPercent}%
-                            </span>
-                        )}
-                        {/* Cart Button — hidden, slides in on card hover */}
-                        <button
-                            onClick={handleAddToCart}
-                            className='absolute top-2 right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center shadow-md border border-slate-100 text-slate-700 transition-all duration-200 opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 hover:scale-110 bg-white hover:bg-[var(--color-primary)] hover:text-white hover:border-[var(--color-primary)]'
-                            title={isInCart ? 'Already in Cart' : 'Add to Cart'}
-                        >
-                            <svg xmlns="http://www.w3.org/2000/svg" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-                            {isInCart && <span className='absolute -top-0.5 -right-0.5 w-2 h-2 bg-green-500 rounded-full ring-2 ring-white' />}
-                        </button>
-                        {/* Wishlist Button — hidden, slides in on card hover (slight delay) */}
-                        <button
-                            onClick={handleWishlistToggle}
-                            className={`absolute top-[46px] right-2 z-10 w-8 h-8 rounded-full flex items-center justify-center shadow-md border transition-all duration-200 delay-75 hover:scale-110 bg-white hover:bg-red-500 hover:border-red-500 ${isInWishlist ? 'opacity-100 translate-x-0 border-red-200' : 'opacity-0 translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 border-slate-100'} ${wishlistAnim ? 'scale-125' : ''}`}
-                            title={isInWishlist ? 'Remove from Wishlist' : 'Add to Wishlist'}
-                        >
-                            <FiHeart
-                                size={13}
-                                className={`transition-colors ${isInWishlist ? 'text-red-500' : 'text-slate-600 hover:text-white'}`}
-                                style={{ fill: isInWishlist ? 'currentColor' : 'none' }}
-                            />
-                        </button>
-                        <Image
-                            src={imageSrc}
-                            alt={product.name}
-                            fill
-                            // Four across on a phone-width grid, up to ~220px on desktop.
-                            // Next uses this to pick the smallest sensible file per device.
-                            sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 220px'
-                            className='object-cover group-hover:scale-105 transition-transform duration-500'
-                            onError={() => setImageFailed(true)}
-                        />
-                    </div>
-
-                    {/* Product Info — Daraz-style */}
-                    <div className='px-2.5 py-2'>
-                        {/* Product Name — 2 lines like Daraz */}
-                        <h3 className='text-[13px] text-slate-800 font-normal line-clamp-2 leading-snug min-h-[2.4em] group-hover:text-[var(--color-primary)] transition-colors'>
-                            {product.name}
-                        </h3>
-
-                        {/* Price */}
-                        <div className='flex items-baseline gap-1.5 mt-1'>
-                            <span className='text-[15px] font-bold' style={{ color: 'var(--color-sale)' }}>৳{currentPrice.toLocaleString()}</span>
-                            {oldPrice && oldPrice > currentPrice && (
-                                <span className='text-[11px] line-through text-slate-400'>৳{oldPrice.toLocaleString()}</span>
-                            )}
-                            {discountPercent > 0 && (
-                                <span className='text-[11px] font-semibold' style={{ color: 'var(--color-sale)' }}>-{discountPercent}%</span>
-                            )}
-                        </div>
-
-                        {/* Rating + sold — Daraz feed line */}
-                        {((product.rating || 0) > 0 || soldCount > 0) && (
-                            <div className='flex items-center gap-1.5 mt-1 text-[10px] text-slate-400'>
-                                {(product.rating || 0) > 0 && (
-                                    <span className='flex items-center gap-0.5'>
-                                        <FiStar size={10} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
-                                        <span className='text-slate-500 font-medium'>{Number(product.rating).toFixed(1)}</span>
-                                    </span>
-                                )}
-                                {(product.rating || 0) > 0 && soldCount > 0 && <span className='text-slate-300'>|</span>}
-                                {soldCount > 0 && <span>{formatCount(soldCount)} sold</span>}
-                            </div>
-                        )}
-                    </div>
-                </div>
+            {/* ── Picture ──────────────────────────────────────────────────
+                A fixed square so every card in a row lines up whatever the
+                source image's aspect ratio is. object-contain, not cover: a
+                packshot cropped to fill loses the edges of the product. */}
+            <Link href={href} className='relative block aspect-square overflow-hidden bg-white p-5'>
+                <Image
+                    src={imageSrc}
+                    alt={product.name}
+                    fill
+                    sizes='(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 260px'
+                    className='object-contain p-4 transition-transform duration-500 group-hover:scale-[1.06]'
+                    onError={() => setImageFailed(true)}
+                />
             </Link>
 
-            </div>
+            {/* Discount, top left */}
+            {discountPercent > 0 && (
+                <span className='pc-badge-off absolute left-3 top-3 z-20'>{discountPercent}%</span>
+            )}
 
-        </>
+            {/* Standing, top right. Only shown once something has actually sold —
+                a "Top Selling" badge on every card means nothing. */}
+            {soldCount > 0 && (
+                <span className='pc-badge-top absolute right-3 top-3 z-20'>
+                    <FiTrendingUp size={12} strokeWidth={2.5} />
+                    Top Selling
+                </span>
+            )}
+
+            {/* ── Details ────────────────────────────────────────────────── */}
+            <div className='pc-body relative mt-auto flex flex-1 flex-col gap-2.5 rounded-[18px] px-4 pb-4 pt-7'>
+
+                {/* The two round controls overlap the top edge of this panel. */}
+                <div className='absolute -top-5 right-4 z-20 flex items-center gap-2'>
+                    <button
+                        onClick={handleWishlistToggle}
+                        aria-label={isInWishlist ? 'Remove from wishlist' : 'Add to wishlist'}
+                        className={`pc-icon ${isInWishlist ? 'is-on' : ''} ${wishlistAnim ? 'scale-110' : ''}`}
+                    >
+                        <FiHeart size={15} style={{ fill: isInWishlist ? 'currentColor' : 'none' }} />
+                    </button>
+                    <Link href={href} aria-label='Compare' className='pc-icon'>
+                        <FiShuffle size={15} />
+                    </Link>
+                </div>
+
+                <h3 className='pc-name'>
+                    <Link href={href} className='hover:text-[var(--color-primary)] transition-colors'>{product.name}</Link>
+                    {' '}
+                    <span className={inStock ? 'pc-stock-in' : 'pc-stock-out'}>
+                        {inStock ? 'In Stock' : 'Out of Stock'}
+                    </span>
+                </h3>
+
+                <div className='flex items-baseline gap-2'>
+                    <span className='pc-price'>৳ {currentPrice.toLocaleString()}</span>
+                    {oldPrice && oldPrice > currentPrice && (
+                        <span className='pc-price-old'>৳ {oldPrice.toLocaleString()}</span>
+                    )}
+                </div>
+
+                {((product.rating || 0) > 0 || soldCount > 0) && (
+                    <div className='flex items-center gap-1.5 text-[11px] text-slate-400'>
+                        {(product.rating || 0) > 0 && (
+                            <span className='flex items-center gap-1'>
+                                <FiStar size={11} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
+                                <span className='font-semibold text-slate-600'>{Number(product.rating).toFixed(1)}</span>
+                            </span>
+                        )}
+                        {(product.rating || 0) > 0 && soldCount > 0 && <span className='text-slate-300'>·</span>}
+                        {soldCount > 0 && <span>{formatCount(soldCount)} sold</span>}
+                    </div>
+                )}
+
+                <div className='mt-1 flex items-center gap-2'>
+                    <button onClick={handleAddToCart} className='pc-cart' disabled={!inStock}>
+                        <FiShoppingBag size={15} strokeWidth={2.2} />
+                        {isInCart ? 'In Cart' : 'Add to Cart'}
+                    </button>
+                    <Link href={href} aria-label='Quick view' className='pc-icon pc-icon-lg'>
+                        <FiEye size={16} />
+                    </Link>
+                </div>
+
+                {showAlreadyAdded && (
+                    <span className='absolute inset-x-4 bottom-4 rounded-lg bg-slate-900/90 py-2 text-center text-[11px] font-medium text-white'>
+                        Already in your cart
+                    </span>
+                )}
+            </div>
+        </div>
     );
 };
 

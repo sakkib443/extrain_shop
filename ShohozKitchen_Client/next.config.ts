@@ -41,6 +41,14 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
+    // The demo catalogue's artwork is SVG, which the image optimizer refuses to
+    // serve unless this is on — a product card whose picture is simply blank is
+    // worse than the risk here. The two settings below are the mitigation Next
+    // documents: an SVG is served as a download rather than rendered inline, and
+    // the CSP stops any script or external reference inside one from running.
+    dangerouslyAllowSVG: true,
+    contentDispositionType: "attachment",
+    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     remotePatterns: [
       {
         protocol: "https",

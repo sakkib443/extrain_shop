@@ -47,12 +47,17 @@ interface SeedProduct {
     specifications: { key: string; value: string }[];
     warrantyMonths: number;
     isFeatured?: boolean;
+    /** Demo sales history, so Top Selling badges and best-seller rows mean something. */
+    sold: number;
+    rating: number;
+    reviews: number;
 }
 
 const PRODUCTS: SeedProduct[] = [
     {
         name: 'LED Ceiling Panel Light 24W',
         slug: 'led-ceiling-panel-light-24w',
+        sold: 412, rating: 4.6, reviews: 58,
         category: 'lighting',
         brand: 'Lumex', model: 'LX-P24',
         price: 1150, originalPrice: 1490, stock: 64,
@@ -72,6 +77,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'Smart Wi-Fi LED Bulb 9W (RGB + White)',
         slug: 'smart-wifi-led-bulb-9w-rgb',
+        sold: 268, rating: 4.4, reviews: 41,
         category: 'lighting',
         brand: 'Lumex', model: 'LX-S9',
         price: 690, originalPrice: 890, stock: 120,
@@ -91,6 +97,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'BLDC Ceiling Fan 56" with Remote',
         slug: 'bldc-ceiling-fan-56-remote',
+        sold: 196, rating: 4.8, reviews: 73,
         category: 'fans-cooling',
         brand: 'Aeromax', model: 'AM-BLDC56',
         price: 8950, originalPrice: 10900, stock: 22,
@@ -110,6 +117,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'Rechargeable Table Fan 12"',
         slug: 'rechargeable-table-fan-12',
+        sold: 143, rating: 4.3, reviews: 29,
         category: 'fans-cooling',
         brand: 'Aeromax', model: 'AM-RT12',
         price: 3450, originalPrice: 4200, stock: 38,
@@ -128,6 +136,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'Modular Switch & Socket Board (6 Gang)',
         slug: 'modular-switch-socket-board-6-gang',
+        sold: 87, rating: 4.5, reviews: 18,
         category: 'wiring-switches',
         brand: 'Voltek', model: 'VT-M6',
         price: 1690, originalPrice: null, stock: 45,
@@ -146,6 +155,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'Copper House Wire 1.5 mm² — 100 m Coil',
         slug: 'copper-house-wire-1-5mm-100m',
+        sold: 64, rating: 4.7, reviews: 12,
         category: 'wiring-switches',
         brand: 'Voltek', model: 'VT-W15',
         price: 4850, originalPrice: 5600, stock: 30,
@@ -164,6 +174,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'Circuit Breaker MCB 32A Single Pole',
         slug: 'circuit-breaker-mcb-32a-single-pole',
+        sold: 231, rating: 4.4, reviews: 26,
         category: 'wiring-switches',
         brand: 'Voltek', model: 'VT-C32',
         price: 540, originalPrice: 720, stock: 88,
@@ -182,6 +193,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'Pure Sine Wave IPS 1200VA',
         slug: 'pure-sine-wave-ips-1200va',
+        sold: 58, rating: 4.9, reviews: 34,
         category: 'power-backup',
         brand: 'PowerCore', model: 'PC-1200S',
         price: 18900, originalPrice: 22500, stock: 12,
@@ -201,6 +213,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'Tubular Battery 150Ah',
         slug: 'tubular-battery-150ah',
+        sold: 41, rating: 4.6, reviews: 21,
         category: 'power-backup',
         brand: 'PowerCore', model: 'PC-T150',
         price: 21500, originalPrice: null, stock: 9,
@@ -219,6 +232,7 @@ const PRODUCTS: SeedProduct[] = [
     {
         name: 'Automatic Voltage Stabiliser 5kVA',
         slug: 'automatic-voltage-stabiliser-5kva',
+        sold: 76, rating: 4.5, reviews: 19,
         category: 'power-backup',
         brand: 'PowerCore', model: 'PC-AVR5',
         price: 12400, originalPrice: 14900, stock: 17,
@@ -259,6 +273,12 @@ async function main() {
     }
 
     // ── Products ──────────────────────────────────────────────────────────
+    // The demo's sale runs from a week ago to a week ahead, recalculated each
+    // time this is run, so the catalogue never shows an offer that has expired.
+    const DAY = 24 * 60 * 60 * 1000;
+    const offerStart = new Date(Date.now() - 7 * DAY);
+    const offerEnd = new Date(Date.now() + 7 * DAY);
+
     let created = 0, updated = 0;
     for (const p of PRODUCTS) {
         const existing = await Product.findOne({ slug: p.slug });
@@ -291,9 +311,19 @@ async function main() {
                         durationUnit: 'months',
                         type: 'manufacturer',
                     },
+                    // A live offer window, so the discount badges and the flash-sale
+                    // countdown have something real to read. Without an end date
+                    // getDisplayPrice treats the markdown as a permanent list price
+                    // and deliberately shows no discount badge.
+                    offerStartDate: discount > 0 ? offerStart : null,
+                    offerEndDate: discount > 0 ? offerEnd : null,
                     status: p.stock > 0 ? 'active' : 'out-of-stock',
                     approvalStatus: 'approved',
                     isFeatured: Boolean(p.isFeatured),
+                    totalSold: p.sold,
+                    rating: p.rating,
+                    reviewCount: p.reviews,
+                    viewCount: p.sold * 34 + 120,
                     isOnSale: discount > 0,
                     isDeleted: false,
                 },

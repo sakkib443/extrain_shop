@@ -690,6 +690,11 @@ const StoreListing: React.FC<StoreListingProps> = ({
                                             originalPrice: product.originalPrice || undefined,
                                             mrp: product.originalPrice || undefined,
                                             discount: product.discount,
+                                            // Without the window the card treats the markdown as a
+                                            // permanent list price and shows no discount badge.
+                                            offerStartDate: product.offerStartDate,
+                                            offerEndDate: product.offerEndDate,
+                                            stock: product.stock,
                                             rating: product.rating,
                                             reviews: product.reviewCount,
                                             warranty: product.tagline || '',
