@@ -1,0 +1,28 @@
+# Normalise line endings so Windows and Linux (CI, Docker, Vercel) agree.
+# Text files are stored with LF in the repository; Git still checks them out
+# with CRLF locally because core.autocrlf=true on this machine.
+* text=auto
+
+# Never touch these — corrupting them is silent and hard to spot.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.webp binary
+*.avif binary
+*.ico binary
+*.woff binary
+*.woff2 binary
+*.ttf binary
+*.otf binary
+*.eot binary
+*.pdf binary
+*.zip binary
+*.mp4 binary
+*.webm binary
+
+# Keep shell scripts LF even on Windows, or they break in Docker/CI.
+*.sh text eol=lf
+
+# Collapse lockfile noise in diffs and reviews.
+package-lock.json -diff linguist-generated
